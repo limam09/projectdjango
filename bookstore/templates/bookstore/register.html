@@ -1,0 +1,33 @@
+<h1>Register</h1>
+<form method="POST" action="">
+  {% csrf_token %}
+  {% comment %} {{form.as_p}} {% endcomment %}
+
+<div class="form-group">
+   <label for="exampleInputEmail"> {{form.username.label}} </label>
+   {% comment %} <input type="email class="form-control" id="exampleInputEmail" aria-describedby="emailHelp"> {% endcomment %}
+    {{form.username}} 
+    </div>
+
+  
+
+  {{form.email.label}}
+  {{form.email}} <br>
+
+  {{form.password1.label}}
+  {{form.password1}} <br>
+
+  {{form.password2.label}}
+  {{form.password2}} <br>
+
+  <script src="https://www.google.com/recaptcha/api.js"></script>
+  <div class="g-recaptcha" data-sitekey="6LcRTpwcAAAAADImDgHmodr09nQxx4d5OT_Lj5NE"></div>
+
+  <button type="submit" class="btn btn-primary">submit</button>
+  <br>
+  {{form.errors}}
+
+  <br>
+  <a href="{% url 'login' %}">Login page</a>
+
+</form>

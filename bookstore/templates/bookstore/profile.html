@@ -1,0 +1,59 @@
+{% extends 'bookstore/main.html'%}
+
+{% block limam %}
+  
+<h1 class="p-5">Profile</h1>
+<hr>
+
+
+<div class="container pb-5">
+  <div class="row">
+    <div class="col-sm">
+      Name User :{{request.user.username}}
+    </div>
+    <div class="col-sm">
+      total orders :<span class="badge bg-primary">{{t_orders}}</span>
+    </div>
+    <div class="col-sm">
+      Pending : <span class="badge bg-secondary">{{p_orders}}</span>
+    </div>
+    <div class="col-sm">
+      Delivered : {{d_orders}} <span class="badge bg-danger">{{d_orders}}</span>
+    </div>
+    <div class="col-sm">
+      in Progress : {{in_orders}} <span class="badge bg-warning text-dark">{{in_orders}}</span>
+    </div>
+    <div class="col-sm">
+      out Of orders : {{out_orders}} <span class="badge bg-info text-dark">{{out_orders}}</span>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+<table class="table">
+  <thead>
+    <tr>
+      
+      <th scope="col">Book</th>
+      <th scope="col">Catagory</th>
+      <th scope="col">Date</th>
+      <th scope="col">status</th>
+
+    </tr>
+  </thead>
+  <tbody>
+      {% for item in orders %}
+        <tr>
+      <td>{{item.book}}</td>
+      <td>{{item.book.category}}</td>
+      <td>{{item.date_created}}</td>
+      <td>{{item.status}}</td>
+        </tr>
+      {% endfor %}
+  </tbody>
+</table>
+</div>
+
+
+{% endblock %}

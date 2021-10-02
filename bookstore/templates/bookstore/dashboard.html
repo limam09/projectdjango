@@ -1,0 +1,126 @@
+{% extends 'bookstore/main.html'%}
+
+{% block limam %}
+  
+<h1 class="p-5">Dashboard</h1>
+
+<div class="container pb-5">
+  <div class="row">
+    <div class="col">
+     Total Orders : <span class="badge bg-primary">{{t_orders}}</span>
+    </div>
+    <div class="col">
+      pending Orders : <span class="badge bg-secondary">{{p_orders}}</span>
+    </div>
+    <div class="col">
+      Delivered Orders : <span class="badge bg-danger">{{d_orders}}</span>
+    </div>
+    <div class="col">
+      in progress Orders : <span class="badge bg-warning text-dark">{{in_orders}}</span>
+    </div>
+    <div class="col">
+      out of Orders : <span class="badge bg-info text-dark">{{out_orders}}</span>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="container">
+ <div class="row">
+  <div class="col">
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title"> Custmers</h5>
+    {% comment %} <h6 class="card-subtitle mb-2 text-muted"><a class="btn btn-warning href="{% url 'create' %}">create customer:</a></h6> {% endcomment %}
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Age</th>
+      <th scope="col">Show</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+      {% for item in customers %}
+        <tr>
+      <td>{{item.name}}</td>
+      <td>{{item.email}}</td>
+      <td>{{item.age}}</td>
+      <td> <a href="{% url 'customer' item.id %}"><i class="fas fa-eye"></i> </a>
+       <td>
+        <a href="#"><i class="fas fa-edit"></i></a>
+        <a class="text-danger" href="#"><i class="fas fa-trash-alt"></i></a>
+       </td>
+        </tr>
+      {% endfor %}
+    
+  </tbody>
+</table>
+</div>
+</div>
+  </div>
+
+
+
+  <div class="col>   
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Orders</h5>
+    <h6 class="card-subtitle mb-2 text-muted"><a class="btn btn-success" href="#">create order:</a></h6>
+        <table class="table">
+  <thead>
+    <tr>
+    <th scope="col">Date</th>
+      <th scope="col">Customer</th>
+      <th scope="col">Book</th>
+      <th scope="col">Status</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    
+      {% for item in orders %}
+        <tr>
+      <td>{{item.date_created}}</td>
+      <td>{{item.customer}}</td>
+      <td>{{item.book}}</td>
+      <td>{{item.status}}</td>
+      <td>
+        <a href="{% url 'update' item.id %}"><i class="fas fa-edit"></i></a>
+        <a class="text-danger" href="{% url 'delete' item.id %}"><i class="fas fa-trash-alt"></i></a>
+       </td>
+        </tr>
+      {% endfor %}
+    
+  </tbody>
+</table>
+</div>
+</div>
+  </div>
+</div>
+  <div class="row pt-5">
+  <div class="col"> 
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+  </div>
+   </div>
+  </div>
+
+  <div class="col">  
+<div class="card" style="width: 18rem;">
+  <div class="card-body">
+    <h5 class="card-title">Card title</h5>
+  </div>
+    </div>
+   </div>
+  </div>
+</div>
+
+
+
+{% endblock %}
