@@ -23,18 +23,20 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-e)ck%7+*te+7&9(swq-1*t$s)bg+&s@z2-0sp&!u+66u8!mm%h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = False 
+DEBUG = False 
 
-#ALLOWED_HOSTS = ['localhost']
-import socket
+ALLOWED_HOSTS = ['limam3866.pythonanywhere.com','127.0.0.1']
 
-if socket.gethostname() == "https":    #server_name
-    DEBUG = False
-    ALLOWED_HOSTS = [".limam3866.pythonanywhere.com",]
-    ...
-else:
-    DEBUG = True
-    ALLOWED_HOSTS = ["localhost", "127.0.0.1",]
+
+# import socket
+
+# if socket.gethostname() == "https":    #server_name
+#     DEBUG = False
+#     ALLOWED_HOSTS = [".limam3866.pythonanywhere.com",]
+#     ...
+# else:
+#     DEBUG = True
+#     ALLOWED_HOSTS = ["localhost", "127.0.0.1",]
 
 
 
