@@ -3,6 +3,7 @@ from . import views
 from django.contrib.auth import views as authViews
 
 
+
 urlpatterns = [
     path('', views.home , name="home"),
     #path('/', views.home , name="home"),
@@ -26,3 +27,5 @@ urlpatterns = [
     path('reset/<uidb64>/<token>/', authViews.PasswordResetConfirmView.as_view(template_name= "bookstore/password_reset_form.html") , name="password_reset_confirm"),
     path('reset_password_complete/', authViews.PasswordResetCompleteView.as_view(template_name= "bookstore/password_reset_done.html"), name="password_reset_complete"),
 ]
+
+

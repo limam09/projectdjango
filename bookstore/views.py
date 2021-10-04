@@ -212,3 +212,8 @@ def ProfileInfo(request):
     
 
     return render(request,'bookstore/profile_info.html', context)
+
+
+
+# def handle_server_error(request):
+#     return render(request,'server_error.html')
