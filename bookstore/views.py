@@ -20,9 +20,9 @@ import requests
 from django.conf import settings
 
 
-#@login_required(login_url='login')
-#@allowedUsers(allowedGroups=['admin'])  #comment issi
-#@forAdmins
+@login_required(login_url='login')
+#@allowedUsers(allowedGroups=['admin'])
+@forAdmins
 def home(request):
     customers = Customer.objects.all()
     orders = Order.objects.all()
@@ -40,15 +40,15 @@ def home(request):
                 'out_orders': out_orders}
     return render(request , 'bookstore/dashboard.html',context)
 
-# @login_required(login_url='login')
-# @forAdmins
+@login_required(login_url='login')
+@forAdmins
 def books(request):
     books=Book.objects.all()
     return render(request,'bookstore/books.html',{'look':books})
 
 
-# @login_required(login_url='login')
-# @allowedUsers(allowedGroups=['admin'])
+@login_required(login_url='login')
+@allowedUsers(allowedGroups=['admin'])
 def customer(request,pk):
     customer = Customer.objects.get(id=pk)
     orders = customer.order_set.all()
