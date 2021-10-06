@@ -31,7 +31,7 @@
   <div class="col">
 <div class="card" style="width: 18rem;">
   <div class="card-body">
-    <h5 class="card-title"> Custmers</h5>
+    <h5 class="card-title"> Customers</h5>
     {% comment %} <h6 class="card-subtitle mb-2 text-muted"><a class="btn btn-warning href="{% url 'create' %}">create customer:</a></h6> {% endcomment %}
     <table class="table">
   <thead>
@@ -40,7 +40,7 @@
       <th scope="col">Email</th>
       <th scope="col">Age</th>
       <th scope="col">Show</th>
-      <th scope="col">Actions</th>
+      {% comment %} <th scope="col">Actions</th> {% endcomment %}
     </tr>
   </thead>
   <tbody>
@@ -51,10 +51,10 @@
       <td>{{item.email}}</td>
       <td>{{item.age}}</td>
       <td> <a href="{% url 'customer' item.id %}"><i class="fas fa-eye"></i> </a>
-       <td>
+       {% comment %} <td>
         <a href="#"><i class="fas fa-edit"></i></a>
         <a class="text-danger" href="#"><i class="fas fa-trash-alt"></i></a>
-       </td>
+       </td> {% endcomment %}
         </tr>
       {% endfor %}
     
@@ -63,8 +63,6 @@
 </div>
 </div>
   </div>
-
-
 
   <div class="col>   
 <div class="card" style="width: 18rem;">
@@ -117,8 +115,8 @@
     <h5 class="card-title">Card title</h5>
   </div>
     </div>
-   </div>
-  </div>
+     </div>
+  </div> 
 </div>
 
 

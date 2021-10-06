@@ -3,7 +3,7 @@ from django.forms import ModelForm
 
 from .models import Customer, Order
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm  # [views.py -->register]
 
 class OrderForm(ModelForm):
     class Meta:

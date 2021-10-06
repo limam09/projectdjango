@@ -11,7 +11,8 @@
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
 
 
-       {% if request.user.is_staff%}
+       {% if request.user.is_staff%}   
+       {% comment %} cache home,books devant user {% endcomment %}
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home<span class="sr-only">(current)</span></a>
         </li>
@@ -36,4 +37,4 @@
       </ul>
       
     </div>
-  </div>
+  </div>  

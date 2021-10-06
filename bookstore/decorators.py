@@ -1,7 +1,7 @@
-from django.shortcuts import redirect
+from django.shortcuts import redirect  #permision for users [checkSome]
 
 
-def notLoggedUsers(view_func):
+def notLoggedUsers(view_func):    # if not logged user
     def wrapper_func(request , *args,**kwargs):
         if request.user.is_authenticated:
             return redirect('home')

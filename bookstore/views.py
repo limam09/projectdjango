@@ -4,14 +4,15 @@ from django.http import HttpResponse
 
 # Create your views here.
 from .models import *
-from .forms import OrderForm,CreateNewUser,CustomerForm
-from django.forms import  inlineformset_factory
+from .forms import OrderForm,CreateNewUser,CustomerForm   # 1,2,3=forms.py,
+from django.forms import  inlineformset_factory  # pour formset dans [my_order_form.html]
 
-from django.contrib import messages
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages  # pour envoier message des errors "forms"  "register.html"
+from django.contrib.auth.forms import UserCreationForm  # [veiws == register] user auth et [forms.py]
 from django.contrib.auth import authenticate,login,logout
-from django.contrib.auth.decorators import login_required
-from .decorators import notLoggedUsers,allowedUsers,forAdmins
+
+from django.contrib.auth.decorators import login_required # decorators = [cachee les fonction]---> aller ou login direct
+from .decorators import notLoggedUsers,allowedUsers,forAdmins   #file decorators.py
 
 from django.contrib.auth.models import Group
 
@@ -21,8 +22,8 @@ from django.conf import settings
 
 
 @login_required(login_url='login')
-#@allowedUsers(allowedGroups=['admin'])
-@forAdmins
+#@allowedUsers(allowedGroups=['admin'])    #il faut que dans group [admin]
+@forAdmins    # for 'admin' unique show file [decorators.py]
 def home(request):
     customers = Customer.objects.all()
     orders = Order.objects.all()
@@ -101,7 +102,7 @@ def update(request,pk):
             return redirect('/')
     context = {'form':form}
 
-    return render(request,'bookstore/my_order_form.html', context)
+    return render(request,'bookstore/update_form.html', context)
 
 @login_required(login_url='login')
 @allowedUsers(allowedGroups=['admin'])
@@ -121,7 +122,7 @@ def delete(request,pk):
 
 #     return render(request,'bookstore/login.html', context)
 
-@notLoggedUsers
+@notLoggedUsers  #file --->decorators.py
 def register(request):
     # if request.user.is_authenticated:
     #     return redirect('home')
@@ -142,9 +143,9 @@ def register(request):
              if result['success']:   
                 user = form.save()
                 username = form.cleaned_data.get('username')
-                # group = Group.objects.get(name="customer")
+                # group = Group.objects.get(name="customer")    3quand on enrgister en niveau user devient direct dans group [customer]
                 # user.groups.add(group)
-                messages.success(request ,username + ' created sucessfully !')
+                messages.success(request ,username + ' Created Sucessfully !')
                 return redirect('login')
             else:
                messages.error(request , 'InValid Recaptcha please try again !') 
@@ -152,9 +153,9 @@ def register(request):
 
     return render(request,'bookstore/register.html', context)
 
-@notLoggedUsers
+@notLoggedUsers      #file --->decorators.py
 def userLogin(request):
-    # if request.user.is_authenticated:
+    # if request.user.is_authenticated:      #file --->decorators.py {func: wrapper_func}
     #     return redirect('home')
     # else:
         if request.method == 'POST':
