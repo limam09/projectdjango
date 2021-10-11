@@ -1,30 +1,52 @@
  {% load static %}  
+ 
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+{% comment %} <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
             integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
             crossorigin="anonymous">
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" 
          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
          crossorigin="anonymous"/>
-<link rel='stylsheet'  type="text/css"  href="{% static '/css/styl.css' %}">
+<link rel='stylsheet'  type="text/css"  href="{% static '/css/styl.css' %}"> {% endcomment %}
+<html>
+<head>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+
+<body id="bg" style="background-image :url('{% static '/images/book.jpg' %}');">
 
 <div class="jumbotron">
- <h1 class="display-4">Login Page</h1>
+{% comment %} <link rel="stylesheet" href="{% static '/css/login.css'%}"> {% endcomment %}
+
+ <h1 class="display-3" style="width: 150%; height: 150px; float: left; background: green; border:5px solid #333;" >Login Page</h1>
+
   <hr class="my-4">
 </div>
 
 
-<div class="container">
-<h1>Login </h1>
+
+<div class="container" >
+<div class='col-sm-6'>
+<div class='panel panel-default'>
+
+
+<div class='panel-heading'> <h1>Login </h1> </div>
+<div class='panel-body'>
 
 <form method="POST" action="">
   {% csrf_token %}
   <div class="form-group">
-   <label for="exampleInputEmail"> username </label>
-  <input type="text"  name="username" class="form-control">
+   <label for="exampleInputEmail"><i> user name : </i> </label>
+<input type="text"  name="username" class="form-control"> 
   </div>
   <div class="form-group">
-   <label for="exampleInputPassword1"> password </label>
+   <label for="exampleInputPassword1"> <i>password :</i> </label>
   <input name="password" type="password" class="form-control" id="exampleInputPassword1">
   </div>
 
@@ -44,3 +66,7 @@
 
 
 {% endfor  %}
+</div>
+</div>
+</body>
+</html>

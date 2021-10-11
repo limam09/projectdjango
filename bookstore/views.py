@@ -25,6 +25,7 @@ from django.conf import settings
 #@allowedUsers(allowedGroups=['admin'])    #il faut que dans group [admin]
 @forAdmins    # for 'admin' unique show file [decorators.py]
 def home(request):
+    # pics = Image.objects.all()
     customers = Customer.objects.all()
     orders = Order.objects.all()
     t_orders = orders.count()
@@ -39,6 +40,7 @@ def home(request):
                 'd_orders': d_orders,
                 'in_orders': in_orders,
                 'out_orders': out_orders}
+                # 'pics':pics}
     return render(request , 'bookstore/dashboard.html',context)
 
 @login_required(login_url='login')
@@ -199,7 +201,7 @@ def userProfile(request):
 
     return render(request,'bookstore/profile.html', context)
 
-@login_required(login_url='login')
+@login_required(login_url='login') 
 #@allowedUsers(allowedGroups=['customer'])
 def ProfileInfo(request):
     customer = request.user.customer
@@ -209,7 +211,7 @@ def ProfileInfo(request):
         if form.is_valid():
             form.save()
 
-    context = {'form':form}
+    context = {'form':form} # [profile_info.html],[my_order_form.html],[update.html]
     
 
     return render(request,'bookstore/profile_info.html', context)

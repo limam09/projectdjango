@@ -6,7 +6,7 @@
 
 <div class="container pb-5">
   <div class="row">
-    <div class="col-sm">
+    <div class="col-sm" style="background: SpringGreen;">
       <a href="{% url 'create' customer.id %}">Create order</a>
     </div>
   </div>
@@ -28,20 +28,20 @@
 
 <div class="container pb-5">
   <div class="row">
-    <div class="col-sm">
+    <div class="col-sm" style="background: DeepPink;">
       Full name :{{customer.name}}
     </div>
-    <div class="col-sm">
+    <div class="col-sm" style="background: DeepPink;">
       Email : {{customer.email}}
     </div>
-    <div class="col-sm">
+    <div class="col-sm" style="background: DeepPink;">
       Age : {{customer.age}}
     </div>
-    <div class="col-sm">
+    <div class="col-sm" style="background: DeepPink;">
       phone : {{customer.phone}}
     </div>
-    <div class="col-sm">
-      NUmber of orders : {{number_orders}}
+    <div class="col-sm" style="background: DeepPink;">
+      Number of orders : {{number_orders}}
     </div>
   </div>
 </div>
@@ -51,7 +51,7 @@
 <div class="container">
 <table class="table">
   <thead>
-    <tr>
+    <tr style="color:Yellow";>
       
       <th scope="col">Book</th>
       <th scope="col">Catagory</th>
@@ -62,7 +62,7 @@
   </thead>
   <tbody>
       {% for item in orders %}
-        <tr>
+        <tr style="background: DarkOrange">
       <td>{{item.book}}</td>
       <td>{{item.book.category}}</td>
       <td>{{item.date_created}}</td>

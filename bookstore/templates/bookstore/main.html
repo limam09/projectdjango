@@ -4,24 +4,52 @@
 <html>
 <head>
 <title>Book Store</title>
+
+<link rel='stylesheet'  type="text/css"  href="{% static '/css/style.css' %}">
+
+{% comment %} <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/pretty-checkbox.min.css"> {% endcomment %}
+
+
+<style>
+.bg-primary {
+    background-color:red;
+}
+h1 {
+    background-color:blue;
+}
+
+body{
+    background-image: url("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.facebook.com%2Flabibliotheque.online%2F&psig=AOvVaw33wurS1wS2wiFKssvUA2li&ust=1633890684360000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCMDamKj7vfMCFQAAAAAdAAAAABAD");
+}
+</style>
 </head>
-<body>
+<body id="bg" style="background-image :url('{% static "/images/bib.jpg" %}');" >
+
+ <div class="container">
+   {% for x in pics%}
+    <img src="{{x.image.url}}" class="img-fluid">
+    <p class="lead">{{x.caption}} </p><hr>
+   {% endfor %}
+ </div>
+
 <div>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
             integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
             crossorigin="anonymous">
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" 
          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
-         crossorigin="anonymous"/>
-<link rel='stylsheet'  type="text/css"  href="{% static '/css/styl.css' %}">
+         crossorigin="anonymous"/> 
+<link rel='stylsheet'  type="text/css"  href="{% static '/css/style.css' %}"/>
+
 {% include 'bookstore/navbar.html'%}
 </div>
   {% block limam %}
-  
 
   {% endblock %}
 
-<h1>Footer</h1>
+{% comment %} <h1>Footer</h1> {% endcomment %}
 <script type="module">
   import { Toast } from 'bootstrap.esm.min.js'
 

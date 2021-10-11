@@ -53,4 +53,11 @@ class Order(models.Model):
     tags =models.ManyToManyField(Tag)
     date_created =models.DateTimeField(auto_now_add=True, null=True)
     status=models.CharField(max_length=200, null=True,choices=STATUS)
+
+
+# class Image(models.Model):
+#     caption=models.CharField(max_length=50)
+#     image=models.ImageField(upload_to="img/%y")
+#     def __str__(self):
+#         return self.caption
     

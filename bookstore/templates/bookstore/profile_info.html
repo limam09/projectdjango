@@ -1,10 +1,16 @@
 {% extends 'bookstore/main.html'%}
+<html>
+<head>
 
+</head>
+
+<body>
 {% block limam %}
-  
-<h1 class="p-5">Profile Info</h1>
+
+<h1 class="p-5">Profile Infoormation :</h1>
 <hr>
 
+<section>
 <div class="container">
    <div class="card" style="width: 18rem;">
   <img src="{{request.user.customer.avatar.url}}" class="card-img-top" alt="...">
@@ -27,3 +33,6 @@
 
 
 {% endblock %}
+</section>
+</body>
+</html>

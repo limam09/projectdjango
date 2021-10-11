@@ -17,14 +17,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 
-from django.conf.urls.static import static
+from django.conf.urls.static import static   # folder "static"=images,css....etc
 from django.conf import settings
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',include('bookstore.urls'))
-]
+    path('',include('bookstore.urls')),
+] 
 
+#+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL ,document_root = settings.MEDIA_ROOT) 
 # handler500 ='bookstore.views.handle_server_error'
-
-urlpatterns += static(settings.MEDIA_URL ,document_root = settings.MEDIA_ROOT)
+# if settings.DEBUG:
+#      urlpatterns += static(settings.MEDIA_URL ,document_root = settings.MEDIA_ROOT)  # folder "static"=images,css....etc
