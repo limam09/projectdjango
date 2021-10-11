@@ -10,7 +10,7 @@ class OrderForm(ModelForm):
         model = Order
         fields ="__all__"
 
-class CustomerForm(ModelForm):
+class CustomerForm(ModelForm):  #image profile_info 
     class Meta:
         model = Customer
         fields ="__all__"

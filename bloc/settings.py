@@ -24,6 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-e)ck%7+*te+7&9(swq-1*t$s)bg+&s@z2-0sp&!u+66u8!mm%h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+#DEBUG = False
 DEBUG = True
 
 # ALLOWED_HOSTS = ['limam3866.pythonanywhere.com','127.0.0.1']
@@ -147,7 +148,7 @@ STATICFILES_DIRS =[
 ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'static/images')  #for images.static
-MEDIA_ROOT = os.path.join(BASE_DIR,"media/") 
+#MEDIA_ROOT = os.path.join(BASE_DIR,"media/") 
 
 
 EMAIL_BACKEND ='django.core.mail.backends.smtp.EmailBackend'   # [reset_password]
