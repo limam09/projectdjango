@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-e)ck%7+*te+7&9(swq-1*t$s)bg+&s@z2-0sp&!u+66u8!mm%h
 #DEBUG = False
 DEBUG = True
 
-# ALLOWED_HOSTS = ['limam3866.pythonanywhere.com','127.0.0.1']
+#ALLOWED_HOSTS = ['limam3866.pythonanywhere.com','127.0.0.1']
 ALLOWED_HOSTS = []
 
 # import socket
