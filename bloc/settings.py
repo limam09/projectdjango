@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -26,6 +27,8 @@ SECRET_KEY = 'django-insecure-e)ck%7+*te+7&9(swq-1*t$s)bg+&s@z2-0sp&!u+66u8!mm%h
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = False
 DEBUG = True
+BOOTSTRAP_ADMIN_SIDEBAR_MENU = False
+
 
 #ALLOWED_HOSTS = ['limam3866.pythonanywhere.com','127.0.0.1']
 ALLOWED_HOSTS = []
@@ -45,6 +48,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    # 'admin_interface',
+    # 'colorfield',
+    # 'jet',
+    #'jazzmin',
+    # 'flat',
+    # 'flat_responsive',
+    'bootstrap_admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -57,6 +67,9 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
+
+
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -70,15 +83,20 @@ ROOT_URLCONF = 'bloc.urls'
 
 TEMPLATES = [
     {
+        
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [os.path.join(BASE_DIR, 'bookstore/templates')],
+        # 'DIRS': ['templates'],
+        # 'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
+                #'django.core.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                
             ],
         },
     },
@@ -143,12 +161,24 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/images/'
 MEDIA_URL = "/media/"
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# STATIC_ROOT= BASE_DIR / 'static'
+
+
+# STATICFILES_STORAGE='whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
 STATICFILES_DIRS =[
     os.path.join(BASE_DIR,'static')
 ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'static/images')  #for images.static
 #MEDIA_ROOT = os.path.join(BASE_DIR,"media/") 
+
+# STATIC_ROOT= BASE_DIR / 'static'
+
+
+# STATICFILES_STORAGE='whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 EMAIL_BACKEND ='django.core.mail.backends.smtp.EmailBackend'   # [reset_password]
@@ -166,3 +196,14 @@ GOOGLE_RECAPTCHA_SECRET_KEY ='6LcRTpwcAAAAAHQ6XdVm-dmYEubjcfA4UebVVcwW'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+# List of apps (and/or models) to base side menu ordering off of (does not need to contain all apps/models)
+# JAZZMIN_SETTINGS = {
+#     # title of the window (Will default to current_admin_site.site_title if absent or None)
+# "site_title": "GMS Admin",
+
+#     # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
+# "site_header": "GMS Admin",
+# "order_with_respect_to": ["auth","main.banners" ,"main.service" ,"main.enquiry" ,"main.gallery" ,
+# "main.GalleryImage" ,"main.page"],
+
+#}

@@ -7,6 +7,10 @@ def notLoggedUsers(view_func):    # if not logged user
             return redirect('home')
         else:
          return view_func(request, *args,**kwargs)
+        # elif request.user.is_authenticated == None:
+        #     return redirect('login')
+        # else:
+        #     return view_func(request, *args, **kwargs)
     return wrapper_func
 
 def allowedUsers(allowedGroups=[]):

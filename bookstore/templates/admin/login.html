@@ -1,0 +1,16 @@
+{% extends 'admin/login.html' %}
+{% load i18n static %}
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+{% block branding %}
+    <a href="{% url 'admin:index' %}" class="django-admin-logo">
+        <!-- Django Administration -->
+        <img height="80" src="{% static "bootstrap_admin/img/logo-140x60.png" %}"
+         alt="{{ site_header|default:_('Django administration') }}">
+    </a>
+{% endblock branding %}
+</body>
+</html>
