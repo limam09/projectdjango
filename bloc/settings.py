@@ -78,7 +78,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    # 'whitenoise.middleware.WhiteNoiseMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 
 
     'django.middleware.security.SecurityMiddleware',
@@ -177,7 +177,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # STATIC_ROOT= BASE_DIR / 'static'
 
 
-# STATICFILES_STORAGE='whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE='whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 STATICFILES_DIRS =[
@@ -219,3 +219,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # "main.GalleryImage" ,"main.page"],
 
 #}
+
+"""
+ procfile
+ requirements.txt
+ runtime.txt
+
+ dependance: django-heroku , gunicorn
+"""
