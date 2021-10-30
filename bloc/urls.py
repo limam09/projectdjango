@@ -21,7 +21,7 @@ from django.conf.urls.static import static   # folder "static"=images,css....etc
 from django.conf import settings
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('limam/', admin.site.urls),
     # path('jet/', include('jet.urls', 'jet')),  # Django JET URLS
     path('',include('bookstore.urls')),
 ] 

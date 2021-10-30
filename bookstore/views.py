@@ -58,7 +58,7 @@ def customer(request,pk):
     number_orders =orders.count()
     # searchFilter = OrderFilter(request.GET ,querySet =orders)
     # orders =searchFilter.qs
-
+    
     context = {'customer': customer ,
                 'orders': orders, 'number_orders': number_orders}
     return render(request,'bookstore/customer.html', context)
@@ -190,16 +190,34 @@ def userProfile(request):
     d_orders = orders.filter(status='Delivered').count()
     in_orders = orders.filter(status='in progress').count()
     out_orders = orders.filter(status='out of order').count()
+    list_articles=Article.objects.all()
     context = {
                 'orders': orders,
                 't_orders':t_orders,
                 'p_orders': p_orders,
                 'd_orders': d_orders,
                 'in_orders': in_orders,
-                'out_orders': out_orders}
+                'out_orders': out_orders,
+                'list_articles':list_articles}
+    
     
 
     return render(request,'bookstore/profile.html', context)
+
+
+@login_required(login_url='login')
+@allowedUsers(allowedGroups=['customer'])
+def detail(request,id_article):
+    #ident =Order.objects.get(id=pk)
+    article =Article.objects.get(id=id_article)
+    category=article.category
+    articles_en_relation=Article.objects.filter(category=category)[:5]  #pour nbrs max qui vas afficher art
+    context={'article':article,
+             "aer":articles_en_relation
+    }
+    #print("l'identite de l'article est : " ,id_article)
+    return render(request,'bookstore/detail.html',context)
+
 
 @login_required(login_url='login') 
 #@allowedUsers(allowedGroups=['customer'])
@@ -215,6 +233,8 @@ def ProfileInfo(request):
     
 
     return render(request,'bookstore/profile_info.html', context)
+
+
 
 
 

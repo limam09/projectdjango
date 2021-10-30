@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
-
+import sys
 from pathlib import Path
 import os
 
@@ -26,12 +26,17 @@ SECRET_KEY = 'django-insecure-e)ck%7+*te+7&9(swq-1*t$s)bg+&s@z2-0sp&!u+66u8!mm%h
 
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = False
-DEBUG = True
+# DEBUG = True
+
+if (len(sys.argv) >=2 and sys.argv[1] == 'runserver'):
+    DEBUG = True
+else:
+    DEBUG = False
 BOOTSTRAP_ADMIN_SIDEBAR_MENU = False
 
 
 #ALLOWED_HOSTS = ['limam3866.pythonanywhere.com','127.0.0.1']
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['cde1-41-188-105-252.ngrok.io','127.0.0.1']
 
 # import socket
 
@@ -45,6 +50,9 @@ ALLOWED_HOSTS = []
 
 
 
+
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -55,6 +63,7 @@ INSTALLED_APPS = [
     # 'flat',
     # 'flat_responsive',
     'bootstrap_admin',
+    #'bookstore.apps.BookstoreConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -62,8 +71,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bookstore',
+    #'debug_toolbar',
     # 'django-filter',
     #'bookstore.apps.BookstoreConfig',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
@@ -77,6 +88,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    #'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 ROOT_URLCONF = 'bloc.urls'
@@ -159,7 +171,7 @@ import os
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/images/'
-MEDIA_URL = "/media/"
+MEDIA_URL = '/media/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # STATIC_ROOT= BASE_DIR / 'static'
@@ -173,7 +185,7 @@ STATICFILES_DIRS =[
 ]
 
 MEDIA_ROOT = os.path.join(BASE_DIR,'static/images')  #for images.static
-#MEDIA_ROOT = os.path.join(BASE_DIR,"media/") 
+MEDIA_ROOT = os.path.join(BASE_DIR,"media") 
 
 # STATIC_ROOT= BASE_DIR / 'static'
 

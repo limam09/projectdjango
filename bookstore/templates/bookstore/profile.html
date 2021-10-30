@@ -1,9 +1,41 @@
 {% extends 'bookstore/main.html'%}
+{% load static %}  
 
 {% block limam %}
-  
-<h1 class="p-5">Profile</h1>
+  {% comment %} <h2 class="text-center mt-3">Welcom to your compte </h2> {% endcomment %}
+<h1 class="text-center p-5">Profile Welcom to your compte  </h1>
+
+{% comment %} <hr> {% endcomment %}
+
+
+{% comment %} {{list_articles}} {% endcomment %}
+<div class="container">
+<div class="row">
+{% for article in list_articles%}
+<div class="card col-12 col-md-6 col-lg-3 col-xl-3">
+<div class="card">
+
+{% comment %} <img class="card-img-top" src="{% static article.image.url %}" alt="Card image cap" style="height:200px"> {% endcomment %}
+{% if article.image == "http://default" %}
+
+<a href="{% url 'detail' article.id %}"> 
+<img class="card-img-top" src="https://via.placeholder.com/400x300" alt="Card image cap" style="height:200px"> </a>
+{% else %}
+<a href="{% url 'detail' article.id %}"> 
+<img class="card-img-top" src="{{article.image.url}}" alt="Card image cap" style="height:200px"> </a>
+{% endif %}
+<div class="card-body" style="height:240px">
+
+<h4 class="card-title"><a href="{% url 'detail' article.id %}">{{article.title}}</a></h2>
+<p class="card-text">{{article.desc|truncatewords:8}}</p>
+<p class="card-text">publie il y a {{article.created_at|timesince}}</p>
+<a href="{% url 'detail' article.id %}" class="btn btn-primary"> Button</a>
 <hr>
+</div>
+</div>
+</div>
+{% endfor %}
+</div>
 
 
 <div class="container pb-5">
@@ -54,6 +86,10 @@
   </tbody>
 </table>
 </div>
-
+</div>
+{% comment %} <div style="width:100px;">
+{% include 'bookstore/footer.html'%}
+</div> {% endcomment %}
+{% include 'bookstore/footer.html'%}
 
 {% endblock %}
