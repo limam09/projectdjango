@@ -56,6 +56,7 @@ ALLOWED_HOSTS = ['cde1-41-188-105-252.ngrok.io','127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
+
     # 'admin_interface',
     # 'colorfield',
     # 'jet',
@@ -78,11 +79,12 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    # 'whitenoise.middleware.WhiteNoiseMiddleware',
 
 
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',  #translations
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -98,8 +100,8 @@ TEMPLATES = [
         
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [os.path.join(BASE_DIR, 'bookstore/templates')],
-        # 'DIRS': ['templates'],
-        # 'DIRS': [],
+        #'DIRS': ['templates'],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -107,7 +109,10 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 #'django.core.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
+                'django.template.context_processors.i18n',    #translations
                 'django.contrib.messages.context_processors.messages',
+
+                # 'apps.notification.context_processors.notifications',
                 
             ],
         },
@@ -154,7 +159,15 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGES = [
+  ('en', ('English')),
+#   ('ar', ('Arabic')),
+  ('fr', ('French')),
+  
+]
+
+LANGUAGE_CODE = 'en'
+# LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
 
@@ -165,6 +178,15 @@ USE_L10N = True
 USE_TZ = True
 
 
+
+LOCALE_PATHS =[
+    os.path.join(BASE_DIR,'locale'),
+]
+
+
+# LOCALE_PATHS = (
+#     BASE_DIR + 'locale/', )
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 import os
@@ -173,11 +195,17 @@ STATIC_URL = '/static/'
 MEDIA_URL = '/images/'
 MEDIA_URL = '/media/'
 
+# from django.utils.translation import gettext_lazy as _
+# LANGUAGES = [
+#   ('ar', _('Arabic')),
+#   ('en', _('English')),
+# ]
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # STATIC_ROOT= BASE_DIR / 'static'
 
 
-STATICFILES_STORAGE='whitenoise.storage.CompressedManifestStaticFilesStorage'
+#STATICFILES_STORAGE='whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 STATICFILES_DIRS =[
@@ -190,7 +218,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR,"media")
 # STATIC_ROOT= BASE_DIR / 'static'
 
 
-# STATICFILES_STORAGE='whitenoise.storage.CompressedManifestStaticFilesStorage'
+#STATICFILES_STORAGE='whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 EMAIL_BACKEND ='django.core.mail.backends.smtp.EmailBackend'   # [reset_password]
@@ -220,10 +248,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #}
 
-"""
- procfile
- requirements.txt
- runtime.txt
+# """
+#  procfile
+#  requirements.txt
+#  runtime.txt
 
- dependance: django-heroku , gunicorn
-"""
+#  dependance: django-heroku , gunicorn
+# """

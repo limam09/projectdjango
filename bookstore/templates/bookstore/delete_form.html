@@ -1,5 +1,15 @@
-{% extends 'bookstore/main.html' %}
+
 {% load static %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+       <title>Book Store</title>
+
+</head>
+
+<body id="bg">
 
 {% block limam %}
 
@@ -21,3 +31,19 @@
 
 
 {% endblock %}
+
+
+
+<script type="module">
+  import { Toast } from 'bootstrap.esm.min.js'
+
+  Array.from(document.querySelectorAll('.toast'))
+    .forEach(toastNode => new Toast(toastNode))
+</script>
+
+
+
+
+
+</body>
+</html>

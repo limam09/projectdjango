@@ -1,30 +1,286 @@
-{% extends 'bookstore/main.html'%}
+{% load static %} 
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Book Store</title>
+
+<style>
+*{
+  margin: 0;
+  pading: 0;
+  box-sizing: border-box;
+}
+body{
+  background-color: rgb(63,72,83);
+  font-family: sans-serif;
+  color: rgb(220,220,220);
+  padding: 0px;
+  width: 100vw;
+  overflow-x: hidden;
+}
+h1{
+  font-weight: 400;
+}
+a{
+  color: inherit;
+}
+p{
+  margin-top: .7em;
+}
+.warning{
+  color: rgb(62,148,236);
+}
+.st_viewport{
+  max-height: 500px;
+  overflow: auto;
+}
+
+[data-table_id="1"]{
+  background-color: rgb(255,115,0);
+}
+[data-table_id="2"]{
+  background-color: rgb(61,53,39);
+  color: rgb(220,220,220);
+}
+[data-table_id="3"]{
+  background-color: rgba(168,189,4, .8);
+}
+
+._rank{
+  min-width: 80px;
+}
+._id{
+  min-width: 60px;
+}
+._name{
+  min-width: 130px;
+}
+._surname{
+  min-width: 130px;
+}
+._year{
+  min-width: 80px;
+}
+._section{
+  min-width: 130px;
+}
+
+pre{
+  overflow: auto;
+}
+
+/** Sticky table styles **/
+.st_viewport{
+  background-color: rgb(62,148,236);
+  color: rgb(27,30,36);
+  margin: 20px 0;
+}
+/* ###  Table wrap */
+.st_wrap_table{
+  
+}
+/* ##   header */
+.st_table_header{
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+  z-index: 1;
+  background-color: rgb(27,30,36);
+  color: rgb(220,220,220);
+}
+.st_table_header h2{
+  font-weight: 800;
+  margin: 0 20px;
+  padding: 20px 0 0;
+}
+.st_table_header .st_row{
+  color: rgba(220,220,220, .7);
+}
+.st_table_header .st_column{
+  
+}
+/* ##  table */
+.st_table{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+/* #   row */
+.st_row{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0;
+}
+.st_table .st_row:nth-child(even){
+  background-color: rgba(0,0,0, .1)
+}
+/* #   column */
+.st_column{
+  padding: 10px 20px;
+}
+
+</style>
+
+
+</head>
+
+<body id="bg">
+{% comment %} <body id="bg" style= "background : green;"> {% endcomment %}
+
+
+<div>
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous">
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" 
+         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+         crossorigin="anonymous"/> 
+<link rel='stylsheet'  type="text/css"  href="{% static '/css/style.css' %}"/>
+
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+<div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'home' %}"> <img src="{% static 'images/book.jpg' %}" 
+    alt="" width="30" height="24"></a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+
+       {% if request.user.is_staff%}   
+       {% comment %} cache home,books devant user {% endcomment %}
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home<span class="sr-only">(current)</span></a>
+        </li>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'books' %}">Books</a>
+    
+        {% endif %}
+         </li>
+        {% comment %} <li class="nav-item">
+          <a class="nav-link" href="{% url 'profile_info' %}">Profile Information</a>
+        </li> {% endcomment %}
+
+        
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#">{{request.user}}</a>
+        
+        </li>
+      </ul>
+
+      <!-- Avatar -->
+      <a
+        class="dropdown-toggle d-flex align-items-center hidden-arrow"
+        href="#"
+        id="navbarDropdownMenuLink"
+        role="button"
+        data-mdb-toggle="dropdown"
+        aria-expanded="false"
+      >
+
+      <a href="{% url 'profile_info' %}">
+        <img
+          {% comment %} src="https://mdbootstrap.com/img/new/avatars/2.jpg" {% endcomment %}
+          src="{{request.user.customer.avatar.url}}"
+          class="rounded-circle"
+          height="25"
+          alt=""
+          loading="lazy"
+        /></a>
+      </a>
+      <ul
+        class="dropdown-menu dropdown-menu-end"
+        aria-labelledby="navbarDropdownMenuLink"
+      >
+        <li>
+          <a class="dropdown-item" href="{% url 'profile_info' %}">My profile</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="#">Settings</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="#">Logout</a>
+        </li>
+      </ul>
+    </div>
+    <!-- Right elements -->
+  </div> 
+
+
+      
+      
+    </div>
+  </div>
+  </div>
 
 {% block limam %}
   
-<h1 class="pt-5 pl-5">Books :</h1>
-<div class="container">
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col" style="color:red">Name</th>
-      <th scope="col" style="color:red">Price</th>
-      <th scope="col" style="color:red">Author</th>
-    </tr>
-  </thead>
-  <tbody style="background: DeepPink;">
-    
-      {% for item in look %}
-        <tr>
-      <td>{{item.name}}</td>
-      <td>{{item.price}}</td>
-      <td>{{item.author}}</td>
-        </tr>
-      {% endfor %}
-    
-  </tbody>
-</table>
-</div>
+{% comment %} <h1 class="pt-5 pl-5">Books :</h1> {% endcomment %}
 
+<main class="st_viewport">
+
+<div class="st_wrap_table" data-table_id="3">
+    <header class="st_table_header">
+      <h2>List of books that have been sold:</h2>
+      <div class="st_row">
+        <div class="st_column _rank">Name</div>
+        <div class="st_column _name">Price</div>
+        <div class="st_column _surname">Author</div>
+      </div>
+    </header>
+     {% for item in look %}
+    <div class="st_table">
+      <div class="st_row">
+        <div class="st_column _rank">{{item.name}}</div>
+        <div class="st_column _name">{{item.price}}</div>
+        <div class="st_column _surname">{{item.author}}</div>
+      </div>
+      {% endfor %}
+      
+    </div>
+  </div>
+</main>
+<footer>
+  <pre>
+    <code>
+    Library_Of_Limam@2021
+    </code>
+  </pre>
+</footer>
 
 {% endblock %}
+
+<script type="module">
+  import { Toast } from 'bootstrap.esm.min.js'
+
+  Array.from(document.querySelectorAll('.toast'))
+    .forEach(toastNode => new Toast(toastNode))
+</script>
+
+
+<!-- jQuery -->
+  <script type="text/javascript" src="{% static 'js/jquery.min.js'%}"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="{% static 'js/popper.min.js'%}"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="{% static 'js/bootstrap.min.js'%}"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="{% static 'js/mdb.min.js'%}"></script>
+  <!-- Your custom scripts (optional) -->
+  <script type="text/javascript"></script>
+</body>
+</html>

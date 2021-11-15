@@ -1,4 +1,6 @@
-{% extends 'bookstore/main.html'%}
+{% comment %} {% extends 'bookstore/main.html'%} {% endcomment %}
+{% load static %}
+{% load i18n %}
 <html>
 <head>
 
@@ -7,8 +9,8 @@
 <body>
 {% block limam %}
 
-<h1 class="p-5">Profile Information :</h1>
-<hr>s
+<h1 class="p-5">{% trans 'Profile Information :'%}</h1>
+<hr>
 
 <section>
 <div class="container">
@@ -31,7 +33,7 @@
 </div>
 
 
-{% include 'bookstore/footer.html'%}
+{% comment %} {% include 'bookstore/footer.html'%} {% endcomment %}
 {% endblock %}
 </section>
 </body>

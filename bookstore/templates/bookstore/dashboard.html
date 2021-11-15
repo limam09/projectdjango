@@ -1,153 +1,383 @@
-{% extends 'bookstore/main.html'%}
+{% comment %} {% extends 'bookstore/main.html'%} {% endcomment %}
 
-{% load static %}  
+{% load static %} 
+{% load i18n %}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>{% trans 'Book Store'%}</title>
+
+<style>
+*{
+  margin: 10;
+  pading: 10;
+  box-sizing: border-box;
+}
+ body{
+  background-color: rgb(63,72,83);
+  font-family: sans-serif;
+  color: rgb(220,220,220);
+  padding: 0px;
+  width: 100vw;
+  overflow-x: hidden;
+} 
+h1{
+  font-weight: 800;
+}
+a{
+  color: inherit;
+}
+p{
+  margin-top: .9em;
+}
+.warning{
+  color: rgb(62,148,236);
+}
+.st_viewport{
+  max-height: 500px;
+  overflow: auto;
+}
+
+[data-table_id="1"]{
+  background-color: rgb(255,115,0);
+}
+[data-table_id="2"]{
+  background-color: rgb(61,53,39);
+  color: rgb(220,220,220);
+}
+[data-table_id="3"]{
+  background-color: rgba(168,189,4, .8);
+}
+
+._rank{
+  min-width: 80px;
+}
+._id{
+  min-width: 60px;
+}
+._name{
+  min-width: 130px;
+}
+._surname{
+  min-width: 130px;
+}
+._year{
+  min-width: 90px;
+}
+._section{
+  min-width: 90px;
+}
+
+pre{
+  overflow: auto;
+}
+
+/** Sticky table styles **/
+.st_viewport{
+  background-color: rgb(62,148,236);
+  color: rgb(27,30,36);
+  margin: 20px 0;
+}
+/* ###  Table wrap */
+.st_wrap_table{
+  
+}
+/* ##   header */
+.st_table_header{
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0px;
+  z-index: 1;
+  background-color: rgb(27,30,36);
+  color: rgb(220,220,220);
+}
+.st_table_header h2{
+  font-weight: 800;
+  margin: 0 20px;
+  padding: 20px 0 0;
+}
+.st_table_header .st_row{
+  color: rgba(220,220,220, .7);
+}
+.st_table_header .st_column{
+  
+}
+/* ##  table */
+.st_table{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+/* #   row */
+.st_row{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 0;
+}
+.st_table .st_row:nth-child(even){
+  background-color: rgba(0,0,0, .1)
+}
+/* #   column */
+.st_column{
+  padding: 10px 20px;
+}
+
+</style>
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+</head>
+
+<body id="bg">
+{% comment %} <body id="bg" style= "background : green;"> {% endcomment %}
+
+
+<div>
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous">
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" 
+         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+         crossorigin="anonymous"/> 
+<link rel='stylsheet'  type="text/css"  href="{% static '/css/style.css' %}"/>
+
+
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style=" background-color: #F8F8F8;">
+<div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'home' %}"> <img src="{% static 'images/book.jpg' %}" 
+    alt="" width="30" height="24"></a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+
+       {% if request.user.is_staff%}   
+       {% comment %} cache home,books devant user {% endcomment %}
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'home' %}">{% trans 'Home'%}<span class="sr-only">(current)</span></a>
+        </li>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'books' %}">{% trans 'Books'%}</a>
+    
+        {% endif %}
+         </li>
+        {% comment %} <li class="nav-item">
+          <a class="nav-link" href="{% url 'profile_info' %}">Profile Information</a>
+        </li> {% endcomment %}
+
+        
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'logout' %}">{% trans 'Logout'%}</a>
+        </li>
+        <li class="nav-item">
+        <a class="nav-link" href="#">{{request.user}}</a>
+        
+        </li>
+
+              </li>
+        <li class="nav-item">
+         <a href="{% url 'profile_info' %}">
+        <img
+          {% comment %} src="https://mdbootstrap.com/img/new/avatars/2.jpg" {% endcomment %}
+          src="{{request.user.customer.avatar.url}}"
+          class="rounded-circle"
+          height="25"
+          alt=""
+          loading="lazy"
+        /></a>
+      </a>
+       </li>
+      </ul>
+
+          <ul>
+        <li class="nav-item me-3 me-lg-0">
+             {% comment %} <a class="nav-link" href="">Books</a> {% endcomment %}
+             <form action="{% url 'set_language'%}" method="post">{% csrf_token %}
+            {% get_current_language as LANGUAGE_CODE %}
+            <input name="next" type="hidden" value="{{ request.get_full_path|slice:'3:' }}">
+            {% if LANGUAGE_CODE == 'fr'%}
+              <button type='submit' name='language' value='en' >
+                 <span class="label"></span>English
+              </button>
+            {% else %}
+                <button type='submit' name='language' value='fr' >
+                   <span class="label"></span>Francais
+                </button>
+                {% comment %} <button type='submit' name='language' value='fr' class="icon solid fa-language">
+                   <span class="label"></span>Francais
+                </button> {% endcomment %}
+              {% endif %}
+              </form>    
+         
+           </li> 
+           </ul>
+      
+      <!-- Avatar -->
+      {% comment %} <a
+        class="dropdown-toggle d-flex align-items-center hidden-arrow"
+        href="#"
+        id="navbarDropdownMenuLink"
+        role="button"
+        data-mdb-toggle="dropdown"
+        aria-expanded="false"
+      > {% endcomment %}
+
+      {% comment %} <a href="{% url 'profile_info' %}"> {% endcomment %}
+        <img
+          {% comment %} src="https://mdbootstrap.com/img/new/avatars/2.jpg" {% endcomment %}
+          {% comment %} src="{{request.user.customer.avatar.url}}"
+          class="rounded-circle"
+          height="25"
+          alt=""
+          loading="lazy"
+        /></a>
+      </a>
+      <ul
+        class="dropdown-menu dropdown-menu-end"
+        aria-labelledby="navbarDropdownMenuLink"
+      >
+        <li>
+          <a class="dropdown-item" href="{% url 'profile_info' %}">My profile</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="#">Settings</a>
+        </li>
+        <li>
+          <a class="dropdown-item" href="#">Logout</a>
+        </li>
+      </ul> {% endcomment %}
+    </div>
+    <!-- Right elements -->
+  </div> 
+
+      
+      
+    </div>
+  </div>
+  </div>
+
 
 
 {% block limam %}
 
+<h1 class="p-1">{% trans 'Dashboard :'%}</h1> 
 
-<style>
+ 
 
- h1 {
-    background-color:red;
-}
+ 
 
-.body{
-    background-image: url("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.facebook.com%2Flabibliotheque.online%2F&psig=AOvVaw33wurS1wS2wiFKssvUA2li&ust=1633890684360000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCMDamKj7vfMCFQAAAAAdAAAAABAD");
-} 
-
-</style>
-
-{% comment %} <link rel='stylsheet' href="{% static '/css/dashboard.css'%}"/> {% endcomment %}
-
-<h1 class="p-5">Dashboard</h1> 
-
- <div >
-
-<div class="container pb-5">
+<div class="container pb-4">
   <div class="row">
-    <div class="col" style="background: DeepPink;">
-     Total Orders : <span class="badge bg-primary">{{t_orders}}</span>
+  
+    {% comment %} <div class="col" style="background: DeepPink;"> {% endcomment %}
+    <div class="col">
+     {% trans 'Total Orders :'%} <span class="badge bg-primary">{{t_orders}}</span>
     </div>
-    <div class="col" style="background: DeepPink;">
-      pending Orders : <span class="badge bg-secondary">{{p_orders}}</span>
+    <div class="col">
+      {% trans 'pending Orders :'%} <span class="badge bg-secondary">{{p_orders}}</span>
     </div>
-    <div class="col" style="background: DeepPink;">
-      Delivered Orders : <span class="badge bg-danger">{{d_orders}}</span>
+    <div class="col">
+      {% trans 'Delivered Orders :'%} <span class="badge bg-danger">{{d_orders}}</span>
     </div>
-    <div class="col" style="background: DeepPink;">
-      in progress Orders : <span class="badge bg-warning text-dark">{{in_orders}}</span>
+    <div class="col">
+       {% trans 'in progress Orders :'%}<span class="badge bg-warning text-dark">{{in_orders}}</span>
     </div>
-    <div class="col" style="background: DeepPink;">
-      out of Orders : <span class="badge bg-info text-dark">{{out_orders}}</span>
+    <div class="col">
+      {% trans 'out of Orders :'%} <span class="badge bg-info text-dark">{{out_orders}}</span>
     </div>
   </div>
 </div>
 
+<main class="st_viewport">
 
-
-
-<div class="container">
- <div class="row">
-  <div class="col">
-<div class="card" style="width: 70%; height: 50px; float: left; background: green; border:5px solid #333;">
-  <div class="card-body">
-
-   <div class="grid"> 
-    <div class="g-col-6"> <h5 class="card-title"> Customers :</h5></div>
-    </div>
-    {% comment %} <h6 class="card-subtitle mb-2 text-muted"><a class="btn btn-warning href="{% url 'create' %}">create customer:</a></h6> {% endcomment %}
-    <table class="table">
-  <thead>
-    <tr>
-      <th scope="col" style="color:Maroon";>Name</th>
-      <th scope="col" style="color:Maroon">Email</th>
-      <th scope="col" style="color:Maroon">Age</th>
-      <th scope="col" style="color:Maroon">Show</th>
-      {% comment %} <th scope="col">Actions</th> {% endcomment %}
-    </tr>
-  </thead>
-  <tbody>
-    
-      {% for item in customers %}
-        <tr style="background: DarkOrange">
-      <td>{{item.name}}</td>
-      <td>{{item.email}}</td>
-      <td>{{item.age}}</td>
-      <td> <a href="{% url 'customer' item.id %}"><i class="fas fa-eye"></i> </a>
-       {% comment %} <td>
-        <a href="#"><i class="fas fa-edit"></i></a>
-        <a class="text-danger" href="#"><i class="fas fa-trash-alt"></i></a>
-       </td> {% endcomment %}
-        </tr>
+  <div class="st_wrap_table" data-table_id="0">
+      <header class="st_table_header">
+      <h2>{% trans 'Customer List :'%}</h2>
+      <div class="st_row">
+        <div class="st_column _rank">{% trans 'Name'%}</div>
+        <div class="st_column _name">{% trans 'Email'%}</div>
+        <div class="st_column _surname">{% trans 'Age'%}</div>
+        <div class="st_column _year">{% trans 'Show'%}</div>
+      </div>
+    </header>
+    {% for item in customers %}
+    <div class="st_table">
+      <div class="st_row">
+        <div class="st_column _rank">{{item.name}}</div>
+        <div class="st_column _name">{{item.email}}</div>
+        <div class="st_column _surname">{{item.age}}</div>
+        <div class="st_column _year"><a href="{% url 'customer' item.id %}"><i class="fas fa-eye"></i> </a></div>
+      </div>
+      </div>
+       {% endfor %}
+  <div class="st_wrap_table" data-table_id="1">
+    <header class="st_table_header">
+      <h2>{% trans 'Order List :'%}</h2>
+      <div class="st_row">
+        <div class="st_column _rank"></div>
+        <div class="st_column _name">{% trans 'Date'%}</div>
+        <div class="st_column _name">{% trans 'Customer'%}</div>
+        <div class="st_column _surname">{% trans 'Book'%}</div>
+        <div class="st_column _year">{% trans 'Status'%}</div>
+        <div class="st_column _section">{% trans 'Edit'%}</div>
+        <div class="st_column _rank">{% trans 'Delete'%}</div>
+      </div>
+    </header>
+     {% for item in orders %}
+    <div class="st_table">
+      <div class="st_row">
+        <div class="st_column _rank">{{item.date_created}}</div>
+        <div class="st_column _name">{{item.customer}}</div>
+        <div class="st_column _surname">{{item.book}}</div>
+        <div class="st_column _year">{{item.status}}</div>
+        <div class="st_column _year"><a href="{% url 'update' item.id %}"><i class="fas fa-edit"></i></a></div>
+        <div class="st_column _section">
+                 <a class="text-danger" href="{% url 'delete' item.id %}"><i class="fas fa-trash-alt"></i></a>
+        </div>
+      </div>
       {% endfor %}
-    
-  </tbody>
-</table>
-</div>
-</div>
+
+
+  
+     
   </div>
-
-
-  <div class="col"> 
-<div class="container">  
-<div class="card" style="margin-left: 30%; width: 80%;  height: 100px; background: blue; border:5px solid #333;">
-  <div class="card-body">
-    <h5 class="card-title">Orders :</h5>
-    <h6 class="card-subtitle mb-2 text-muted"><a class="btn btn-success" href="#">create order</a></h6>
-        <table class="table">
-  <thead>
-    <tr>
-    <th scope="col" style="color:Maroon">Date</th>
-      <th scope="col" style="color:Maroon">Customer</th>
-      <th scope="col" style="color:Maroon">Book</th>
-      <th scope="col" style="color:Maroon">Status</th>
-      <th scope="col" style="color:Maroon">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    
-      {% for item in orders %}
-        <tr style="background: DarkOrange">
-      <td>{{item.date_created}}</td>
-      <td>{{item.customer}}</td>
-      <td>{{item.book}}</td>
-      <td>{{item.status}}</td>
-      <td>
-        <a href="{% url 'update' item.id %}"><i class="fas fa-edit"></i></a>
-        <a class="text-danger" href="{% url 'delete' item.id %}"><i class="fas fa-trash-alt"></i></a>
-       </td>
-        </tr>
-      {% endfor %}
-    
-  </tbody>
-</table>
-</div>
-</div>
-  </div>
-</div>
-</div>
-
-  {% comment %} <div class="row pt-5">
-  <div class="col"> 
-<div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-  </div>
-   </div>
-  </div>
-
-  <div class="col">  
-<div class="card" style="width: 18rem;">
-  <div class="card-body">
-    <h5 class="card-title">Card title</h5>
-  </div>
-    </div> {% endcomment %}
-     </div>
-  </div> 
-</div>
-
-</div>
-
-
+</main>
+<footer>
+  <pre>
+    <code>
+{% trans 'Library_Of_Limam@2021'%}
+    </code>
+  </pre>
+</footer>
 {% endblock %}
+
+<script type="module">
+  import { Toast } from 'bootstrap.esm.min.js'
+
+  Array.from(document.querySelectorAll('.toast'))
+    .forEach(toastNode => new Toast(toastNode))
+</script>
+
+
+<!-- jQuery -->
+  <script type="text/javascript" src="{% static 'js/jquery.min.js'%}"></script>
+  <!-- Bootstrap tooltips -->
+  <script type="text/javascript" src="{% static 'js/popper.min.js'%}"></script>
+  <!-- Bootstrap core JavaScript -->
+  <script type="text/javascript" src="{% static 'js/bootstrap.min.js'%}"></script>
+  <!-- MDB core JavaScript -->
+  <script type="text/javascript" src="{% static 'js/mdb.min.js'%}"></script>
+  <!-- Your custom scripts (optional) -->
+  <script type="text/javascript"></script>
+</body>
+</html>

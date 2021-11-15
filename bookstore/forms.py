@@ -1,7 +1,9 @@
 from django.db import models
 from django.forms import ModelForm
 
-from .models import Customer, Order
+from django import forms
+
+from .models import Commande, Customer, Order
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm  # [views.py -->register]
 
@@ -20,3 +22,11 @@ class CreateNewUser(UserCreationForm):
     class Meta:
         model = User
         fields =['username','email','password1','password2']
+
+# class CommandForm(ModelForm):
+#     class Meta:
+#         model = Commande
+#         fields =['tit']
+
+# class NameForm(forms.Form):
+#     items = forms.CharField(label='your title', max_length=100)

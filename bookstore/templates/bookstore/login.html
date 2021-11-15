@@ -1,4 +1,6 @@
- {% load static %}  
+ 
+{% load static %}  
+{% load i18n %}  
  
 
 {% comment %} <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
@@ -17,46 +19,74 @@
 
 <!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  
+
 </head>
 
-<body id="bg" style="background-image :url('{% static '/images/book.jpg' %}');">
+{% comment %} <body id="bg" style="background-image :url('{% static '/images/book.jpg' %}');"> {% endcomment %}
+<body id="bg">
 
-<div class="jumbotron">
-{% comment %} <link rel="stylesheet" href="{% static '/css/login.css'%}"> {% endcomment %}
+   
 
- <h1 class="display-3" style="width: 150%; height: 150px; float: left; background: green; border:5px solid #333;" >Login Page</h1>
+ <div class="jumbotron">
+<link rel="stylesheet" href="{% static '/css/login.css'%}"> 
 
-  <hr class="my-4">
-</div>
+{% comment %} <h1 class="display-3" style="width: 100%; height: 150px; float: left; background: green; border:5px solid #333;" >Login Page</h1>  {% endcomment %}
 
+  {% comment %} <hr class="my-4">
+</div> {% endcomment %}
 
+ <li class="nav-item me-3 me-lg-0">
+             {% comment %} <a class="nav-link" href="">Books</a> {% endcomment %}
+             <form action="{% url 'set_language'%}" method="post">{% csrf_token %}
+            {% get_current_language as LANGUAGE_CODE %}
+            <input name="next" type="hidden" value="{{ request.get_full_path|slice:'3:' }}">
+            {% if LANGUAGE_CODE == 'fr'%}
+              <button type='submit' name='language' value='en' class="icon solid fa-language">
+                 <span class="label"></span>English
+              </button>
+            {% else %}
+                <button type='submit' name='language' value='fr' class="icon solid fa-language">
+                   <span class="label"></span>Francais
+                </button>
+                {% comment %} <button type='submit' name='language' value='fr' class="icon solid fa-language">
+                   <span class="label"></span>Francais
+                </button> {% endcomment %}
+              {% endif %}
+              </form>    
+         
+           </li> 
 
 <div class="container" >
+
 <div class='col-sm-6'>
 <div class='panel panel-default'>
 
 
-<div class='panel-heading'> <h1>Login </h1> </div>
+<div class='panel-heading'><i class="fas fa-user"></i> <h1>{% trans 'Login'%} </h1> </div>
+<div class="card-header"><i class="fas fa-user">  </i><h1>{% trans 'Connexion User'%}  </h1></div>
+ {% comment %} <a href="#"><i class="fas fa-edit"></i></a> {% endcomment %}
 <div class='panel-body'>
 
 <form method="POST" action="">
   {% csrf_token %}
   <div class="form-group">
-   <label for="exampleInputEmail"><i> user name : </i> </label>
+   <label for="exampleInputEmail"><i>  {% trans 'user name :'%} </i> </label>
 <input type="text"  name="username" class="form-control"> 
   </div>
   <div class="form-group">
-   <label for="exampleInputPassword1"> <i>password :</i> </label>
+   <label for="exampleInputPassword1"> <i>{% trans 'password :'%} </i> </label>
   <input name="password" type="password" class="form-control" id="exampleInputPassword1">
   </div>
 
-  <button type="submit" class="btn btn-primary">submit</button>
+  <button type="submit" class="btn btn-primary">{% trans 'Sign up'%} </button> 
 
 </form>
 
-<a href="{% url 'register' %}"> Register </a>
+<a href="{% url 'register' %}">  {% trans 'Register'%} </a>
 
-<a href="{% url 'reset_password' %}"> Forgot Password </a>
+<a href="{% url 'reset_password' %}"> {% trans 'Forgot Password'%}  </a>
 
 
 {% for msg in messages %}
@@ -65,8 +95,130 @@
 </div>
 
 
+
 {% endfor  %}
 </div>
 </div>
-</body>
+
+{% comment %} 
+<form>
+  <!-- Email input -->
+  <div class="form-outline mb-4">
+    <input type="email" id="form2Example1" class="form-control" />
+    <label class="form-label" for="form2Example1">Email address</label>
+  </div>
+
+  <!-- Password input -->
+  <div class="form-outline mb-4">
+    <input type="password" id="form2Example2" class="form-control" />
+    <label class="form-label" for="form2Example2">Password</label>
+  </div>
+
+  <!-- 2 column grid layout for inline styling -->
+  <div class="row mb-4">
+    <div class="col d-flex justify-content-center">
+      <!-- Checkbox -->
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          value=""
+          id="form2Example34"
+          checked
+        />
+        <label class="form-check-label" for="form2Example34"> Remember me </label>
+      </div>
+    </div>
+
+    <div class="col">
+      <!-- Simple link -->
+      <a href="#!">Forgot password?</a>
+    </div>
+  </div>
+
+  <!-- Submit button -->
+  <button type="submit" class="btn btn-primary btn-block mb-4">Sign in</button>
+
+  <!-- Register buttons -->
+  <div class="text-center">
+    <p>Not a member? <a href="#!">Register</a></p>
+    <p>or sign up with:</p>
+    <button type="button" class="btn btn-primary btn-floating mx-1">
+      <i class="fab fa-facebook-f"></i>
+    </button>
+
+    <button type="button" class="btn btn-primary btn-floating mx-1">
+      <i class="fab fa-google"></i>
+    </button>
+
+    <button type="button" class="btn btn-primary btn-floating mx-1">
+      <i class="fab fa-twitter"></i>
+    </button>
+
+    <button type="button" class="btn btn-primary btn-floating mx-1">
+      <i class="fab fa-github"></i>
+    </button>
+  </div>
+</form> {% endcomment %}
+
+
+
+</body> 
 </html>
+
+
+
+
+
+
+
+
+
+
+{% comment %} {% load static %}  
+ 
+
+<html>
+<head>
+  
+</head>
+<body>
+    
+   
+    <div class="container">
+      <div class="col-md-12 mt-5">
+      <form method="POST" action="">
+       {% csrf_token %}
+        <div class="card">
+        <div class="card-header text-center"><i class="fas fa-user"></i>Connexion User </div>
+        <div class="card-body">
+            
+            <input type="text"  placeholder="user name" name="username" class="form-control">
+            <input name="password"  placeholder="password" type="password" class="form-control" id="exampleInputPassword1" required>
+  
+        </div>
+
+        <div class="card-footer">
+           <button class="bnt btn-primary btn-block">Se connecter</button>
+        </div>
+
+         </div>
+         </form>
+        </div>
+        <a href="{% url 'register' %}"> Register </a>
+
+<a href="{% url 'reset_password' %}"> Forgot Password </a>
+
+
+{% for msg in messages %}
+<h4>{{msg}}</h4>
+        </div>
+    </div>
+
+
+
+{% endfor  %}
+          
+
+</body>
+</html> {% endcomment %}

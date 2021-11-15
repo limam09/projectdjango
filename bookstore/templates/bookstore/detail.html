@@ -1,22 +1,53 @@
 {% extends 'bookstore/main.html'%}
 {% comment %} {% include 'bookstore/navbar.html'%} {% endcomment %}
 {% load static %}  
+{% load i18n %}  
 
 
 
 {% block limam %}
-    <div class="container">
-    <div class="row">
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+    {% comment %} <div class="container"> {% endcomment %}
+     <div class="row">
     <div class="col-md-8">
+
+    {% comment %} <div class="card card-sm">
+     <div class="card-body row no-gutters align-items-center">
+     <div class="col">
+         <input type="search" placeholder"enter le nom du produit" name="item-name">
+         <div class="col-auto">
+         <button type="submit" class="btn btn-success">Rechercher</button>
+         </div>       
+     </div>
+     </div>
+     </div> {% endcomment %}
     
-    <h1 class ="text-center mt-2">Detail Article </h1>
+    <h1 class ="mt-2">{% trans 'the details : '%} </h1>
+    {% comment %} <h1 class ="text-center mt-2">the details </h1> {% endcomment %}
             <img src="{{article.image.url}}" alt="" style="max-width:500px;">
-            <h2>{{article.title}}</h2>
-            <p>{{article.desc}}</p>
-            <i class="flag flag-uae"></i>
+            
+            {% if LANGUAGE_CODE == 'fr' %}
+            <h2>{{article.title_fr}}</h2>
+            {% else %}
+             <h2>{{article.title}}</h2>
+            {% endif %}
+            
+           {% comment %} <h2>{{article.title}}</h2> {% endcomment %}
+
+            <h4 style="color:red">{% trans 'Price :'%}  {{article.price}} MRU</h4>
+           {% if LANGUAGE_CODE == 'fr' %}
+            <p>{{article.desc_fr}}</p>
+            {% else %}
+             <h2>{{article.desc}}</h2>
+            {% endif %} 
+
+             {% comment %} <h2>{{article.desc}}</h2> {% endcomment %}
+
+            <a href="{% url 'checkout' article.id %}" class="btn btn-primary"> {% trans 'purchasing' %}</a>
+            {% comment %} <a id="{{article.id }}" class="btn ted btn-success"> Ajouter </a> {% endcomment %}
       </div>
     <div class="col-md-4">
-        <h3 class="mt-2">les articles en relations:</h3>
+        <h3 class="mt-2"> {% trans 'Synonyms : '%} </h3>
         <div class="row">
            {% for art in aer%}
 
@@ -29,10 +60,25 @@
             <img class="card-img-top" src="https://via.placeholder.com/400x300" alt="Card image cap" style="max-width:180px;">> 
            {% endif %}
            </div>
-            <div class="col-5">
-            <strong>{{art.title}} </strong><br>
-            {{art.desc|truncatewords:7}}
+          <div class="col-5">
+            {% if LANGUAGE_CODE == 'fr' %}
+            <strong>{{art.title_fr}} </strong><br>
+            {% else %}
+             <h2>{{article.title}}</h2>
+            {% endif %} 
+
+            {% comment %} <strong>{{art.title}} </strong><br> {% endcomment %}
+
+           {% if LANGUAGE_CODE == 'fr' %}
+            {{art.desc_fr|truncatewords:7}}
+            {% else %}
+             {{art.desc|truncatewords:7}}
+            {% endif %} 
+            
+             {% comment %} {{art.desc|truncatewords:7}} {% endcomment %}
+
             </div>
+            
             {% endif %}
            {% endfor %}
           
@@ -47,6 +93,31 @@
      {% include 'bookstore/footer.html'%}
      </div>
 {% endblock %}
+{% comment %} {% block js%}
+      <script type="text/javascript">
+         console.log('just pour tester '); 
+         if(localStorage.getItem('panier')==null){
+             var panier ={};
+         }else{
+           panier =JSON.parse(localStorage.getItem('panier'));
+         }
+         $(document).on('click','.ted',function(){
+           console.log('ajouter');
+           var item_id = this.id.toString();
+           console.log(item_id);
+           if(panier[item_id] != undefined){
+             panier[item_id]=panier[item_id] +1;
+           }else{
+             panier[item_id]=1;
+           }
+           console.log(panier);
+           localStorage.setItem('panier',JSON.stringify(panier));
+           document.getElementById("panier").innerHTML="panier("+ object.keys(panier).length+")";
+           
+         });
+      </script> {% endcomment %}
+
+{% comment %} {% endblock %} {% endcomment %}
 
 {% comment %} 
 <!DOCTYPE html>

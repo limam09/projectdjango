@@ -1,13 +1,19 @@
 {% load static %}  
+{% load i18n %}  
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    {% comment %} notification {% endcomment %}
-  <div class="container-fluid">
+{% comment %} <nav class="navbar navbar-expand-lg navbar-dark bg-dark"> {% endcomment %}
+
+
+
+
+
+  {% comment %} notification {% endcomment %}
+  {% comment %} <div class="container-fluid">
   <i class="flag flag-mauritania"></i>
   <i class="flag flag-uae"></i>
-    <ul class="navbar-nav">
+    <ul class="navbar-nav"> {% endcomment %}
       <!-- Notification dropdown -->
-      <li class="nav-item dropdown">
+      {% comment %} <li class="nav-item dropdown">
         <a
           class="nav-link dropdown-toggle hidden-arrow"
           href="#"
@@ -17,7 +23,7 @@
           aria-expanded="false"
         >
           <i class="fas fa-bell"></i>
-          <span class="badge rounded-pill badge-notification bg-danger">1</span>
+          <span class="badge rounded-pill badge-notification bg-danger">3</span>
         </a>
         <ul
           class="dropdown-menu dropdown-menu-end"
@@ -34,66 +40,86 @@
           </li>
         </ul>
       </li>
-      <ul class="navbar-nav d-flex flex-row">
+      <ul class="navbar-nav d-flex flex-row"> {% endcomment %}
       <!-- Icons -->
-      <li class="nav-item me-3 me-lg-0">
+      {% comment %} <li class="nav-item me-3 me-lg-0">
         <a class="nav-link" href="#">
           <i class="fas fa-shopping-cart"></i>
         </a>
-        <ul>
+        <ul> {% endcomment %}
       <!-- Notification dropdown -->
-    </ul>
-  </div>
+    {% comment %} </ul>
+  </div> {% endcomment %}
 
 
       
 
 
     {% comment %} search {% endcomment %}
-   <div class="container-fluid">
-    <form class="d-flex input-group w-auto">
+   {% comment %} <div class="container-fluid">
+    <form class="d-flex input-group w-auto" action="{% url 'search' %}">
       <input
-        type="search"
-        class="form-control rounded"
-        placeholder="Search"
-        aria-label="Search"
+        type="text"
+        class="form-control mr-sm-2"
+        {% comment %} placeholder="Search" {% endcomment %}
+        {% comment %} placeholder={% trans 'Search'%} {% endcomment %}
+        {% comment %} aria-label={% trans 'Search'%} {% endcomment %}
+        {% comment %} aria-label="Search"
         aria-describedby="search-addon"
-      />
-      <span class="input-group-text border-0" id="search-addon">
-        <i class="fas fa-search"></i>
-      </span>
+        name="article"
+      /> {% endcomment %}
+      {% comment %} <span class="input-group-text border-0" id="search-addon"> {% endcomment %}
+        {% comment %} <i class="fas fa-search"></i> {% endcomment %}
+      {% comment %} </span>
     </form>
-  </div>
+  </div> {% endcomment %} 
 
 
-  <div class="container-fluid">
-    <a class="navbar-brand" href="{% url 'home' %}"> <img src="{% static 'images/book.jpg' %}" 
-    alt="" width="30" height="24"></a>
+  {% comment %} <div class="container-fluid"> {% endcomment %}
+    {% comment %} <a class="navbar-brand" href="{% url 'home' %}"> <img src="{% static 'images/book.jpg' %}" 
+    alt="" width="30" height="24"></a> {% endcomment %}
+
+   {% comment %} <a class="navbar-brand" href="{% url 'home' %}">{% trans 'Home'%} </a> {% endcomment %}
+
+
     {% comment %} <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button> {% endcomment %}
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+    {% comment %} <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0"> {% endcomment %}
 
 
-       {% if request.user.is_staff%}   
+       {% comment %} {% if request.user.is_staff%}    {% endcomment %}
        {% comment %} cache home,books devant user {% endcomment %}
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="{% url 'home' %}">Home<span class="sr-only">(current)</span></a>
+        {% comment %} <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'home' %}">{% trans 'Home'%}<span class="sr-only">(current)</span></a>
         </li>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'books' %}">Books</a>
+          <a class="nav-link" href="{% url 'books' %}">{% trans 'Books'%}</a>
     
-        {% endif %}
-        </li>
+        {% endif %} {% endcomment %}
+        {% comment %} </li>
         <li class="nav-item">
           <a class="nav-link" href="{% url 'profile_info' %}">Profile Information</a>
-        </li>
+        </li> {% endcomment %}
 
+        {% comment %} <li class="nav-item">
+          <a class="nav-link" href="{% url 'shop' %}">Shop</a>
+        </li> {% endcomment %}
+{% comment %} 
+        <li class="nav-item me-3 me-lg-0">
+    
+         <a id="panier" class="nav-link" href="{% url 'shop' %}" >{% trans 'Shoping '%}<i class="fas fa-shopping-cart"> </a></i>
+        </li> {% endcomment %}
 
+         {% comment %} {% if request.user.is_authenticated %}
+            {% comment %} <a href="{% url 'dashboard' %}" class="navbar-item">Dashboard</a> {% endcomment %}
+            {% comment %} <a href="{% url 'notifications' %}" class="navbar-item">Notifications ({{ notifications.count }})</a>    
+         {% endif %}  {% endcomment %}
+{% comment %} 
         <li class="nav-item">
-          <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+          <a class="nav-link" href="{% url 'logout' %}">{% trans 'Logout'%}</a>
         </li>
         <li class="nav-item">
         <a class="nav-link" href="#">{{request.user}}</a>
@@ -103,7 +129,39 @@
       
     </div>
 
+     <li class="nav-item dropdown"> {% endcomment %}
+             {% comment %} <a class="nav-link" href="">Books</a> {% endcomment %}
+              {% comment %} <form action="{% url 'set_language'%}" method="post">{% csrf_token %}
+            {% get_current_language as LANGUAGE_CODE %}
+            <input name="next" type="hidden" value="{{ request.get_full_path|slice:'3:' }}">
+            {% if LANGUAGE_CODE == 'fr'%}
+              <button type='submit' name='language' value='en' class="icon solid fa-language">
+                 <span class="label"></span>English
+              </button>
+            {% else %}
+                <button type='submit' name='language' value='fr' class="icon solid fa-language">
+                   <span class="label"></span>Francais {% endcomment %}
+                {% comment %} </button> {% endcomment %}
+                {% comment %} <button type='submit' name='language' value='fr' class="icon solid fa-language">
+                   <span class="label"></span>Francais
+                </button> {% endcomment %}
+              {% comment %} {% endif %}
+              </form>     {% endcomment %}
+         
+           {% comment %} </li> {% endcomment %}
 
+{% comment %} 
+           <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Language
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li> {% endcomment %}
        
       
       {% comment %} <!-- Right elements -->
@@ -114,7 +172,7 @@
       </a> {% endcomment %}
       
    
-      <!-- Avatar -->
+      {% comment %} <!-- Avatar -->
       <a
         class="dropdown-toggle d-flex align-items-center hidden-arrow"
         href="#"
@@ -124,10 +182,10 @@
         aria-expanded="false"
       >
 
-      {% comment %} <a href="{% url 'profile_info' %}"> {% endcomment %}
-        <img
-          src="https://mdbootstrap.com/img/new/avatars/2.jpg"
-          {% comment %} src="{{request.user.customer.avatar.url}}" {% endcomment %}
+      <a href="{% url 'profile_info' %}"> {% endcomment %}
+        {% comment %} <img {% endcomment %}
+          {% comment %} src="https://mdbootstrap.com/img/new/avatars/2.jpg" {% endcomment %}
+          {% comment %} src="{{request.user.customer.avatar.url}}"
           class="rounded-circle"
           height="25"
           alt=""
@@ -139,7 +197,7 @@
         aria-labelledby="navbarDropdownMenuLink"
       >
         <li>
-          <a class="dropdown-item" href="#">My profile</a>
+          <a class="dropdown-item" href="{% url 'profile_info' %}">My profile</a>
         </li>
         <li>
           <a class="dropdown-item" href="#">Settings</a>
@@ -148,8 +206,122 @@
           <a class="dropdown-item" href="#">Logout</a>
         </li>
       </ul>
-    </div>
+    </div> {% endcomment %}
     <!-- Right elements -->
+  {% comment %} </div> 
+
+  </div>   {% endcomment %}
+
+  {% comment %} {% block js%}
+      <script type="text/javascript">
+         consol.log('just pour tester '); 
+         if(localStorage.getItem('panier')==null){
+           var panier ={};
+         }else{
+           panier =JSON.parse(localStorage.getItem('panier'));
+         }
+         $(document).on('click','.ted',function(){
+           consol.log('ajouter');
+         });
+      </script>
+
+{% endblock %} {% endcomment %}
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style=" background-color: #F8F8F8;">
+<div class="container-fluid">
+    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+      <a class="navbar-brand" href="{% url 'home' %}"> {% trans 'Home' %}</a>
+       
+       {% if request.user.is_staff%}   
+       {% comment %} cache home,books devant user {% endcomment %}
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'home' %}">{% trans 'Home' %}<span class="sr-only">(current)</span></a>
+        </li>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'books' %}">{% trans 'Books' %}</a>
+    
+        {% endif %}
+        </li>
+
+          <li class="nav-item me-3 me-lg-0">
+    
+         <a id="panier" class="nav-link"  href="{% url 'shop' %}" >{% trans 'Shoping' %} <i class="fas fa-shopping-cart"> </a></i>
+        </li>
+       
+
+
+        
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'logout' %}">{% trans 'Logout'%}</a>
+        </li>
+
+        <li class="nav-item">
+        <a class="nav-link" href="#">{{request.user}}</a>
+        
+        </li>
+        <li class="nav-item">
+         <a href="{% url 'profile_info' %}">
+        <img
+          {% comment %} src="https://mdbootstrap.com/img/new/avatars/2.jpg" {% endcomment %}
+          src="{{request.user.customer.avatar.url}}"
+          class="rounded-circle"
+          height="25"
+          alt=""
+          loading="lazy"
+        /></a>
+      </a>
+       </li>
+      </ul>
+        
+    <form class="d-flex input-group w-auto" action="{% url 'search' %}" >
+      <input
+        type="text"
+        class="form-control mr-sm-2"
+        {% comment %} placeholder="Search" {% endcomment %}
+        placeholder={% trans 'Search'%}
+        aria-label="Search"
+        aria-describedby="search-addon"
+        name="article"
+      />
+      <span class="input-group-text border-0" id="search-addon">
+      </span>
+    </form>
+
+       <ul>
+        <li class="nav-item me-3 me-lg-0">
+             {% comment %} <a class="nav-link" href="">Books</a> {% endcomment %}
+             <form action="{% url 'set_language'%}" method="post">{% csrf_token %}
+            {% get_current_language as LANGUAGE_CODE %}
+            <input name="next" type="hidden" value="{{ request.get_full_path|slice:'3:' }}">
+            {% if LANGUAGE_CODE == 'fr'%}
+              <button type='submit' name='language' value='en' >
+                 <span class="label"></span>English
+              </button>
+            {% else %}
+                <button type='submit' name='language' value='fr' >
+                   <span class="label"></span>Francais
+                </button>
+                {% comment %} <button type='submit' name='language' value='fr' class="icon solid fa-language">
+                   <span class="label"></span>Francais
+                </button> {% endcomment %}
+              {% endif %}
+              </form>    
+         
+           </li> 
+      </ul>
+</nav>
+    
   </div> 
 
-  </div>  
+   
+      
+      
+    </div>
+  
+  </div>
+  
+  </div>

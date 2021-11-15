@@ -1,0 +1,66 @@
+{% extends 'bookstore/main.html'%}
+
+{% load static %} 
+{% load i18n %} 
+
+{% block limam %}
+
+<div class="container">
+<i class="fas fa-h2    "><h2>{% trans 'List Of Search'%} </h2></i>
+<br>
+<div class="row">
+{% for article in List_article%}
+ 
+<div class="col col-12 col-md-6 col-lg-3 col-xl-3">
+<div class="card mb-3 p-2" >
+
+{% comment %} <img class="card-img-top" src="{% static article.image.url %}" alt="Card image cap" style="height:200px"> {% endcomment %}
+{% if article.image == "http://default" %}
+
+<a href="{% url 'detail' article.id %}"> 
+<img class="card-img-top" src="https://via.placeholder.com/400x300" alt="Card image cap" style="height:200px"> </a>
+{% else %}
+<a href="{% url 'detail' article.id %}"> 
+<img class="card-img-top" src="{{article.image.url}}" alt="Card image cap" style="height:200px"> </a>
+{% endif %}
+<div class="card-body" style="height:240px">
+ {% if LANGUAGE_CODE == 'fr' %}
+<h4 class="card-title"><a href="{% url 'detail' article.id %}">{{article.title_fr}}</a></h2>
+{% else %}
+<h4 class="card-title"><a href="{% url 'detail' article.id %}">{{article.title}}</a></h2>
+{% endif %}
+{% if LANGUAGE_CODE == 'fr' %}
+<p class="card-text">{{article.desc_fr|truncatewords:8}}</p>
+{% else %}
+    <p class="card-text">{{article.desc|truncatewords:8}}</p>
+{% endif %}
+<p class="card-text">publie il y a {{article.created_at|timesince}}</p>
+<a href="{% url 'detail' article.id %}" class="btn btn-primary"> {% trans 'Detail'%}</a>
+<hr>
+</div>
+</div>
+</div>
+
+
+
+
+{% endfor %} 
+
+
+</div>
+
+{% comment %} la recherche de l'adminstrateur est : <strong>{{query}}</strong> {% endcomment %}
+{% comment %} {% for article in List_article%}
+ <li>{{article.title}}</li>
+ <p>{{article.desc}}</p>
+ <hr>
+{% endfor %} {% endcomment %}
+
+</div>
+
+
+
+
+{% include 'bookstore/footer.html'%}
+
+{% endblock %}

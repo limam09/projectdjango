@@ -12,6 +12,12 @@ urlpatterns = [
     path('customer/<str:pk>', views.customer ,name="customer"),
 
     path('article/<int:id_article>', views.detail ,name="detail"),
+    path('article/recherche', views.search ,name="search"),
+    path('shp/', views.shop ,name="shop"),
+    path('checkout/<int:id_cmd>', views.checkout ,name="checkout"),
+    path('confirmation/', views.confirmation ,name="confirmation"),
+    # path('notifications/', views.notifications, name='notifications'),
+    # path('message-sms', views.sms ,name="sms"),
     #path('create/', views.create ,name="create"),
     path('create/<str:pk>', views.create ,name="create"),
     path('update/<str:pk>', views.update ,name="update"),

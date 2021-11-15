@@ -17,14 +17,31 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 
+from django.conf.urls.i18n import i18n_patterns
 from django.conf.urls.static import static   # folder "static"=images,css....etc
 from django.conf import settings
 
 urlpatterns = [
+      path('i18n/', include('django.conf.urls.i18n')),  #translations
+]
+     #1+2
+
+urlpatterns += i18n_patterns (
     path('limam/', admin.site.urls),
     # path('jet/', include('jet.urls', 'jet')),  # Django JET URLS
     path('',include('bookstore.urls')),
-] 
+    
+)
+
+# urlpatterns =  [
+#     path('limam/', admin.site.urls),
+#     # path('jet/', include('jet.urls', 'jet')),  # Django JET URLS
+#     path('',include('bookstore.urls')),
+    
+# ]
+# urlpatterns = (
+#       path('', include('lang.urls',namespace='lang')),  #translations
+# )
 
 #+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL ,document_root = settings.MEDIA_ROOT) 

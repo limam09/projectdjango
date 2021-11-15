@@ -1,81 +1,185 @@
-{% extends 'bookstore/main.html'%}
+{% comment %} {% extends 'bookstore/main.html'%} {% endcomment %}
 
+
+ {% load static %}  
+ {% load i18n %}  
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>{% trans 'Book Store'%}</title>
+
+<style>
+*{
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+body{
+    font-family: Helvetica;
+    -webkit-font-smoothing: antialiased;
+    background: rgba( 71, 147, 227, 1);
+    
+}
+h2{
+    text-align: center;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: white;
+    padding: 30px 0;
+}
+
+/* Table Styles */
+
+.table-wrapper{
+    margin: 10px 70px 70px;
+    box-shadow: 0px 35px 50px rgba( 0, 0, 0, 0.2 );
+}
+
+.fl-table {
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: normal;
+    border: none;
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 100%;
+    white-space: nowrap;
+    background-color: white;
+}
+
+.fl-table td, .fl-table th {
+    text-align: center;
+    padding: 8px;
+}
+
+.fl-table td {
+    border-right: 1px solid #f8f8f8;
+    font-size: 12px;
+}
+
+.fl-table thead th {
+    color: #ffffff;
+    background: #4FC3A1;
+}
+
+
+.fl-table thead th:nth-child(odd) {
+    color: #ffffff;
+    background: #324960;
+}
+
+.fl-table tr:nth-child(even) {
+    background: #F8F8F8;
+}
+
+}
+</style>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+</head>
+
+<body id="bg">
+
+
+ <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+            integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+            crossorigin="anonymous">
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" 
+         integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+         crossorigin="anonymous"/> 
+<link rel='stylsheet'  type="text/css"  href="{% static '/css/style.css' %}"/>
+
+  
 {% block limam %}
   
-<h1 class="p-5">Customer</h1>
+<h1 class="p-5">{% trans 'Customer :'%}</h1>
 
 <div class="container pb-5">
   <div class="row">
-    <div class="col-sm" style="background: SpringGreen;">
-      <a href="{% url 'create' customer.id %}">Create order</a>
+    <div class="col-sm" >
+      <a href="{% url 'create' customer.id %}">{% trans 'Create order'%}</a>
     </div>
   </div>
 </div>
 
-{% comment %} <hr>
+
 <div class="container pb-5">
   <div class="row">
     <div class="col-sm">
-      <form class="form-inline  my-2 my-lg-0" method="GET">
-        {% comment %} <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"> {% endcomment %}
-        {% comment %} {{myFilter.form}} {% endcomment %}
-        {% comment %} <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> {% endcomment %}
-      {% comment %} </form>
+      {% trans 'Full name :'%}  {{customer.name}}
     </div>
-  </div>
-</div> {% endcomment %}
-{% comment %} <hr> {% endcomment %} 
-
-<div class="container pb-5">
-  <div class="row">
-    <div class="col-sm" style="background: DeepPink;">
-      Full name :{{customer.name}}
+    <div class="col-sm" >
+       {% trans 'Email :'%} {{customer.email}}
     </div>
-    <div class="col-sm" style="background: DeepPink;">
-      Email : {{customer.email}}
+    <div class="col-sm">
+       {% trans 'Age :'%} {{customer.age}}
     </div>
-    <div class="col-sm" style="background: DeepPink;">
-      Age : {{customer.age}}
+    <div class="col-sm" >
+       {% trans 'phone :'%} {{customer.phone}}
     </div>
-    <div class="col-sm" style="background: DeepPink;">
-      phone : {{customer.phone}}
-    </div>
-    <div class="col-sm" style="background: DeepPink;">
-      Number of orders : {{number_orders}}
+    <div class="col-sm">
+       {% trans 'Number of orders :'%} {{number_orders}}
     </div>
   </div>
 </div>
 
 
-
-<div class="container">
-<table class="table">
-  <thead>
-    <tr style="color:Yellow";>
-      
-      <th scope="col">Book</th>
-      <th scope="col">Catagory</th>
-      <th scope="col">Date</th>
-      <th scope="col">status</th>
-      <th scope="col">Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-      {% for item in orders %}
-        <tr style="background: DarkOrange">
-      <td>{{item.book}}</td>
-      <td>{{item.book.category}}</td>
-      <td>{{item.date_created}}</td>
-      <td>{{item.status}}</td>
-      <td>
-        <a href="{% url 'update' item.id %}"><i class="fas fa-edit"></i></a>
-        <a class="text-danger" href="{% url 'delete' item.id %}"><i class="fas fa-trash-alt"></i></a>
-       </td>
+<h2 > {% trans 'Custumer :'%}</h2>
+<div class="table-wrapper">
+    <table class="fl-table">
+        <thead>
+        <tr>
+            <th>{% trans 'Book'%}</th>
+            <th>{% trans 'Catagory'%}</th>
+            <th>{% trans 'Date'%}</th>
+            <th>{% trans 'Status'%}</th>
+            <th>{% trans 'Action'%}</th>
         </tr>
-      {% endfor %}
-  </tbody>
-</table>
+        </thead>
+        <tbody>
+          {% for item in orders %}
+        <tr>
+            <td>{{item.book}}</td>
+            <td>{{item.book.category}}</td>
+            <td>{{item.date_created}}</td>
+            <td>{{item.status}}</td>
+            <td>
+                <a href="{% url 'update' item.id %}"><i class="fas fa-edit"></i></a>
+                 <a class="text-danger" href="{% url 'delete' item.id %}"><i class="fas fa-trash-alt"></i></a>
+            </td>
+        </tr>
+        {% endfor %}
+        <tbody>
+    </table>
 </div>
+
+<footer>
+  <pre>
+    <code>
+ {% trans 'Library_Of_Limam@2021'%}
+    </code>
+  </pre>
+</footer>
 
 
 {% endblock %}
+
+
+
+<script type="module">
+  import { Toast } from 'bootstrap.esm.min.js'
+
+  Array.from(document.querySelectorAll('.toast'))
+    .forEach(toastNode => new Toast(toastNode))
+</script>
+
+
+
+
+
+</body>
+</html>

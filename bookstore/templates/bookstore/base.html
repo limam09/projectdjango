@@ -1,0 +1,94 @@
+{% extends 'bookstore/main.html'%}
+{% load static %}  
+{% load i18n %}  
+
+
+{% block limam %}
+{% comment %} {{list_articles}} {% endcomment %}
+
+
+{% comment %} 
+  <div class="card card-sm">
+     <div class="card-body row no-gutters align-items-center">
+     <div class="col">
+         <input type="search" placeholder"enter le nom du produit" name="item-name">
+         <div class="col-auto">
+         <button type="submit" class="btn btn-success">Rechercher</button>
+         </div>       
+     </div>
+     </div>
+     </div> {% endcomment %}
+
+<div class="container">
+<div class="row">
+{% for article in list_articles%}
+<div class="col col-12 col-md-6 col-lg-3 col-xl-3">
+<div class="card mb-3 p-2" >
+
+{% comment %} <img class="card-img-top" src="{% static article.image.url %}" alt="Card image cap" style="height:200px"> {% endcomment %}
+{% if article.image == "http://default" %}
+
+<a href="{% url 'detail' article.id %}"> 
+<img class="card-img-top" src="https://via.placeholder.com/400x300" alt="Card image cap" style="height:200px"> </a>
+{% else %}
+<a href="{% url 'detail' article.id %}"> 
+<img class="card-img-top" src="{{article.image.url}}" alt="Card image cap" style="height:200px"> </a>
+{% endif %}
+<div class="card-body" style="height:240px">
+
+{% if LANGUAGE_CODE == 'fr' %}
+<h4 class="card-title"><a href="{% url 'detail' article.id %}">{{article.title_fr}}</a></h2>
+{% else %}
+   <h4 class="card-title"><a href="{% url 'detail' article.id %}">{{article.title}}</a></h2>
+{% endif %}
+
+{% if LANGUAGE_CODE == 'fr' %}
+<p class="card-text">{{article.desc_fr|truncatewords:8}}</p>
+{% else %}
+             <p class="card-text">{{article.desc|truncatewords:8}}</p>
+{% endif %}
+
+<p class="card-text">{% trans 'published ago' %} {{article.created_at|timesince}}</p>
+<div style="color:red" class="card-text">{{article.price}} MRU</div>
+{% comment %} <button class="btn btn-warning">Voir</button> {% endcomment %}
+<a href="{% url 'detail' article.id %}" class="btn btn-warning">{% trans 'See' %} </a>
+<hr>
+</div>
+</div>
+</div>
+{% endfor %}
+</div>
+   
+
+   <div class="row mt-3">
+   <div class="col-md-3 offset-md-4">
+       <ul class="pagination">
+       {% if list_articles.has_previous %}
+         <li class="page-item">
+          <a class="page-link" href="?page={{ list_articles.previous_page_number }}">{% trans 'previous' %}</a>
+
+         </li>
+        {% endif %}
+
+        <li class="page-item active">
+           <a class="page-link" href="?page={{ list_articles.number }}">{{ list_articles.number }}</a>
+           
+        </li>
+
+        {% if list_articles.has_next%}
+         <li class="page-item">
+          <a class="page-link"href="?page={{ list_articles.next_page_number }}">{% trans 'next' %}</a>
+
+         </li>
+        {% endif %}
+       
+       </ul>
+       
+       </div> 
+       </div>
+{% endblock %}
+
+
+{% comment %} <div style="width:1200px;">
+     {% include 'bookstore/footer.html'%}
+     </div> {% endcomment %}

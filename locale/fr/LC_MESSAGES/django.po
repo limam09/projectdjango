@@ -1,0 +1,339 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-11-09 02:36+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#: .\bookstore\templates\admin\base_site.html:8
+#: .\bookstore\templates\admin\login.html:12
+msgid "Django administration"
+msgstr "Administration Django"
+
+#: .\bookstore\templates\bookstore\base.html:54
+msgid "published ago"
+msgstr "publié il y a"
+
+#: .\bookstore\templates\bookstore\base.html:58
+msgid "See"
+msgstr "Voir"
+
+#: .\bookstore\templates\bookstore\base.html:72
+msgid "previous"
+msgstr "précédent"
+
+#: .\bookstore\templates\bookstore\base.html:84
+msgid "next"
+msgstr "suivant"
+
+#: .\bookstore\templates\bookstore\checkout.html:117
+#: .\bookstore\templates\bookstore\checkout.html:118
+#: .\bookstore\templates\bookstore\dashboard.html:319
+msgid "Name"
+msgstr "Nom"
+
+#: .\bookstore\templates\bookstore\checkout.html:121
+#: .\bookstore\templates\bookstore\dashboard.html:320
+msgid "Email"
+msgstr "Email"
+
+#: .\bookstore\templates\bookstore\checkout.html:125
+#: .\bookstore\templates\bookstore\checkout.html:126
+msgid "Address"
+msgstr "Address"
+
+#: .\bookstore\templates\bookstore\checkout.html:129
+#: .\bookstore\templates\bookstore\checkout.html:130
+msgid "Telephone number"
+msgstr "Numrou de telephon"
+
+#: .\bookstore\templates\bookstore\checkout.html:133
+#: .\bookstore\templates\bookstore\checkout.html:134
+msgid "the state"
+msgstr "ville"
+
+#: .\bookstore\templates\bookstore\checkout.html:137
+msgid "Country"
+msgstr "pay"
+
+#: .\bookstore\templates\bookstore\checkout.html:392
+msgid "Payer par:"
+msgstr ""
+
+#: .\bookstore\templates\bookstore\checkout.html:400
+#, fuzzy
+#| msgid "number cart buy"
+msgid "Numero cart payer"
+msgstr "Numero cart payer"
+
+#: .\bookstore\templates\bookstore\checkout.html:413
+msgid "Order to buy"
+msgstr "commander "
+
+#: .\bookstore\templates\bookstore\customer.html:11
+#: .\bookstore\templates\bookstore\dashboard.html:11
+#: .\bookstore\templates\bookstore\profile.html:7
+msgid "Book Store"
+msgstr "Librairie"
+
+#: .\bookstore\templates\bookstore\customer.html:100
+msgid "Customer :"
+msgstr "Client"
+
+#: .\bookstore\templates\bookstore\customer.html:105
+msgid "Create order"
+msgstr "cree command"
+
+#: .\bookstore\templates\bookstore\customer.html:114
+msgid "Full name :"
+msgstr "nom complet :"
+
+#: .\bookstore\templates\bookstore\customer.html:117
+msgid "Email :"
+msgstr "Email"
+
+#: .\bookstore\templates\bookstore\customer.html:120
+msgid "Age :"
+msgstr ""
+
+#: .\bookstore\templates\bookstore\customer.html:123
+msgid "phone :"
+msgstr ""
+
+#: .\bookstore\templates\bookstore\customer.html:126
+#, fuzzy
+#| msgid "out Of orders :"
+msgid "Number of orders :"
+msgstr "Hors commandes :"
+
+#: .\bookstore\templates\bookstore\customer.html:132
+#, fuzzy
+#| msgid "Customer"
+msgid "Custumer :"
+msgstr "Client"
+
+#: .\bookstore\templates\bookstore\customer.html:137
+#: .\bookstore\templates\bookstore\dashboard.html:342
+msgid "Book"
+msgstr "livres"
+
+#: .\bookstore\templates\bookstore\customer.html:138
+msgid "Catagory"
+msgstr "Categorie"
+
+#: .\bookstore\templates\bookstore\customer.html:139
+#: .\bookstore\templates\bookstore\dashboard.html:340
+msgid "Date"
+msgstr "Date"
+
+#: .\bookstore\templates\bookstore\customer.html:140
+#: .\bookstore\templates\bookstore\dashboard.html:343
+msgid "Status"
+msgstr "statut"
+
+#: .\bookstore\templates\bookstore\customer.html:141
+msgid "Action"
+msgstr "Action"
+
+#: .\bookstore\templates\bookstore\dashboard.html:169
+#: .\bookstore\templates\bookstore\navbar.html:278
+#: .\bookstore\templates\bookstore\navbar.html:284
+#: .\bookstore\templates\bookstore\profile.html:127
+#: .\bookstore\templates\bookstore\profile.html:133
+msgid "Home"
+msgstr "Accueil"
+
+#: .\bookstore\templates\bookstore\dashboard.html:173
+#: .\bookstore\templates\bookstore\navbar.html:288
+#: .\bookstore\templates\bookstore\profile.html:137
+msgid "Books"
+msgstr "livres"
+
+#: .\bookstore\templates\bookstore\dashboard.html:184
+#: .\bookstore\templates\bookstore\navbar.html:302
+#: .\bookstore\templates\bookstore\profile.html:151
+msgid "Logout"
+msgstr "Se deconnecter"
+
+#: .\bookstore\templates\bookstore\dashboard.html:284
+msgid "Dashboard :"
+msgstr "Tableau de bord :"
+
+#: .\bookstore\templates\bookstore\dashboard.html:296
+msgid "Total Orders :"
+msgstr "commandes totales :"
+
+#: .\bookstore\templates\bookstore\dashboard.html:299
+msgid "pending Orders :"
+msgstr "En attente: "
+
+#: .\bookstore\templates\bookstore\dashboard.html:302
+msgid "Delivered Orders :"
+msgstr "Livré:"
+
+#: .\bookstore\templates\bookstore\dashboard.html:305
+msgid "in progress Orders :"
+msgstr "en cours:"
+
+#: .\bookstore\templates\bookstore\dashboard.html:308
+msgid "out of Orders :"
+msgstr "Hors commandes:"
+
+#: .\bookstore\templates\bookstore\dashboard.html:317
+msgid "Customer List :"
+msgstr "Liste de Clients :"
+
+#: .\bookstore\templates\bookstore\dashboard.html:321
+msgid "Age"
+msgstr "Age"
+
+#: .\bookstore\templates\bookstore\dashboard.html:322
+msgid "Show"
+msgstr "Spectacle"
+
+#: .\bookstore\templates\bookstore\dashboard.html:337
+msgid "Order List :"
+msgstr "Liste de commande :"
+
+#: .\bookstore\templates\bookstore\dashboard.html:341
+msgid "Customer"
+msgstr "Client"
+
+#: .\bookstore\templates\bookstore\dashboard.html:344
+msgid "Edit"
+msgstr "Éditer"
+
+#: .\bookstore\templates\bookstore\dashboard.html:345
+msgid "Delete"
+msgstr "Effacer"
+
+#: .\bookstore\templates\bookstore\detail.html:28
+msgid "the details : "
+msgstr "les détails :"
+
+#: .\bookstore\templates\bookstore\detail.html:42
+msgid "Price :"
+msgstr "Prix"
+
+#: .\bookstore\templates\bookstore\detail.html:52
+msgid "purchasing"
+msgstr "acheter"
+
+#: .\bookstore\templates\bookstore\detail.html:57
+msgid "Synonyms : "
+msgstr "Synonymes :"
+
+#: .\bookstore\templates\bookstore\login.html:70
+msgid "Login"
+msgstr "Login"
+
+#: .\bookstore\templates\bookstore\login.html:71
+msgid "Connexion User"
+msgstr "Utilisateur Connect"
+
+#: .\bookstore\templates\bookstore\login.html:79
+msgid "user name :"
+msgstr "nom utilisateur"
+
+#: .\bookstore\templates\bookstore\login.html:83
+msgid "password :"
+msgstr "mot de passe"
+
+#: .\bookstore\templates\bookstore\login.html:87
+msgid "Sign up"
+msgstr "Entrer"
+
+#: .\bookstore\templates\bookstore\login.html:91
+msgid "Register"
+msgstr ""
+
+#: .\bookstore\templates\bookstore\login.html:93
+msgid "Forgot Password"
+msgstr "Oublier mot de passe"
+
+#: .\bookstore\templates\bookstore\navbar.html:295
+#: .\bookstore\templates\bookstore\profile.html:144
+msgid "Shoping"
+msgstr "exposition"
+
+#: .\bookstore\templates\bookstore\navbar.html:330
+#: .\bookstore\templates\bookstore\profile.html:179
+msgid "Search"
+msgstr "Rechercher"
+
+#: .\bookstore\templates\bookstore\profile.html:227
+msgid " Welcom to your compte"
+msgstr "Bienvenue sur votre compte"
+
+#: .\bookstore\templates\bookstore\profile.html:328
+msgid "Name User :"
+msgstr "Nom d'utilisateur :"
+
+#: .\bookstore\templates\bookstore\profile.html:331
+msgid "total orders :"
+msgstr "commandes totales :"
+
+#: .\bookstore\templates\bookstore\profile.html:334
+msgid "Pending :"
+msgstr "En attente : "
+
+#: .\bookstore\templates\bookstore\profile.html:337
+msgid "Delivered :"
+msgstr "Livré :"
+
+#: .\bookstore\templates\bookstore\profile.html:340
+msgid "in Progress :"
+msgstr "en cours :"
+
+#: .\bookstore\templates\bookstore\profile.html:343
+msgid "out Of orders :"
+msgstr "Hors commandes :"
+
+#: .\bookstore\templates\bookstore\profile.html:353
+msgid "BOOKS "
+msgstr "LIVRES"
+
+#: .\bookstore\templates\bookstore\profile.html:355
+msgid "Book "
+msgstr "livres"
+
+#: .\bookstore\templates\bookstore\profile.html:358
+msgid "Date "
+msgstr "Date"
+
+#: .\bookstore\templates\bookstore\profile.html:359
+msgid "status "
+msgstr "statut"
+
+#: .\bookstore\templates\bookstore\search.html:9
+msgid "List Of Search"
+msgstr "List De Recherch"
+
+#: .\bookstore\templates\bookstore\search.html:39
+msgid "Detail"
+msgstr "Detail"
+
+#~ msgid "buy by :"
+#~ msgstr "Payer par:"
+
+#~ msgid "sold by"
+#~ msgstr "Payer par:"
+
+#~ msgid "New Compt"
+#~ msgstr "Niveaux Compt"
+
+#~ msgid "Shoping "
+#~ msgstr "exposition"
