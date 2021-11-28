@@ -83,7 +83,7 @@ class Article(models.Model):
     # desc_ar=models.TextField()
     desc_fr=models.TextField()
     image=models.ImageField()
-    # price=models.CharField(max_length=150)
+    # image=models.CharField(max_length=5000)
     price=models.CharField(max_length=100)
     created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)

@@ -33,16 +33,6 @@ urlpatterns += i18n_patterns (
     
 )
 
-# urlpatterns =  [
-#     path('limam/', admin.site.urls),
-#     # path('jet/', include('jet.urls', 'jet')),  # Django JET URLS
-#     path('',include('bookstore.urls')),
-    
-# ]
-# urlpatterns = (
-#       path('', include('lang.urls',namespace='lang')),  #translations
-# )
-
 #+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 urlpatterns += static(settings.MEDIA_URL ,document_root = settings.MEDIA_ROOT) 
 # handler500 ='bookstore.views.handle_server_error'
